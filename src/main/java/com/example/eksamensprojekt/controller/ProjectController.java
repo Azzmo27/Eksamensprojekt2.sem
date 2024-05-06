@@ -44,7 +44,7 @@ public class ProjectController {
         return "redirect:/showProjects";
     }
 
-    @GetMapping("/showProjects")
+    @GetMapping("/showProject")
     public String showProjects(Model model) {
         List<Project> projects = projectService.findProject();
         model.addAttribute("projects", projects);
