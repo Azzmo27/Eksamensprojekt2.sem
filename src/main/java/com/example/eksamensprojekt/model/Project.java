@@ -6,7 +6,8 @@ import java.util.List;
 
 public class Project {
 
-    private String ProjectName;
+    private int project_id;
+    private String projectName;
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -14,8 +15,9 @@ public class Project {
     private List<Task> taskList;
 
 
-    public Project (String ProjectName, String description, LocalDate startDate,LocalDate endDate){
-        this.ProjectName = ProjectName;
+    public Project (int project_id, String ProjectName, String description, LocalDate startDate,LocalDate endDate){
+        this.project_id = project_id;
+        this.projectName = ProjectName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -27,13 +29,17 @@ public class Project {
 
     }
 
-
-    public String getName() {
-        return ProjectName;
+    public int getProject_id() {
+        return project_id;
     }
 
-    public void setName(String name) {
-        this.ProjectName = name;
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String name) {
+        this.projectName = name;
     }
 
 
