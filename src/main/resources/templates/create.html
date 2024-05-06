@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Project</title>
+</head>
+<body>
+<h2>Create Project</h2>
+<form action="/create" method="post">
+    <label for="projectName">Project Name:</label><br>
+    <input type="text" id="projectName" name="projectName"><br>
+
+    <label for="description">Description:</label><br>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+
+    <label for="startDate">Start Date:</label><br>
+    <input type="date" id="startDate" name="startDate"><br>
+
+    <label for="endDate">End Date:</label><br>
+    <input type="date" id="endDate" name="endDate"><br>
+
+    <input type="submit" value="Create Project">
+</form>
+</body>
+</html>
