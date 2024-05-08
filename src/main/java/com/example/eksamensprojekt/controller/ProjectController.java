@@ -41,7 +41,7 @@ public class ProjectController {
     @PostMapping("/create")
     public String createProject(Project project, RedirectAttributes redirectAttributes) {
         projectService.createProject(project);
-        return "redirect:/showProject";
+        return "redirect:/showProjects";
     }
 
     @GetMapping("/showProject")
