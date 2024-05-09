@@ -27,10 +27,10 @@ public class SubProjectRepository {
         template.update(sql, Subproject.getProjectName(), project.getDescription(), project.getStartDate(), project.getEndDate());
     }
 
-    public void updateSubProject(String name, Project updatedProject) {
-        String updateSql = "UPDATE project SET projectName = ?, description = ?, startDate = ?, endDate = ? WHERE projectName = ?";
-        template.update(updateSql , updatedProject.getProjectName(), updatedProject.getDescription(),
-                updatedProject.getStartDate(), updatedProject.getEndDate(), name);
+    public void updateSubProject(String name, Subproject updatedSubProject) {
+        String updateSql = "UPDATE project SET subProjectName = ?, subProjectDescription = ?, subProjectStartDate = ?, subProjectendDate = ? WHERE subProjectName = ?";
+        template.update(updateSql , updatedSubProject.getSubProjectName(), updatedSubProject.getSubprojectDescription(),
+                updatedSubProject.getSubProjectStartDate(), updatedSubProject.getSubProjectEndDate(), name);
     }
 
     public void deleteSubProject(String projectName) {
