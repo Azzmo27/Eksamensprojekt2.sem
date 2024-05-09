@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,13 +29,13 @@ public class ProjectRepositoryTest {
         Project project = new Project();
         project.setProjectName("Test name");
         project.setDescription("Test description");
-        project.setStartDate(Date.of(2024, 12, 23));
-        project.setEndDate(Date.of(2025, 1, 23));
+        project.setStartDate(LocalDate.of(2024, 12, 23));
+        project.setEndDate(LocalDate.of(2025, 1, 23));
 
         assertEquals("Test name", project.getProjectName());
         assertEquals("Test description", project.getDescription());
-        assertEquals(Date.of(2024, 12, 23), project.getStartDate());
-        assertEquals(Date.of(2025, 1, 23), project.getEndDate());
+        assertEquals(LocalDate.of(2024, 12, 23), project.getStartDate());
+        assertEquals(LocalDate.of(2025, 1, 23), project.getEndDate());
     }
 }
 

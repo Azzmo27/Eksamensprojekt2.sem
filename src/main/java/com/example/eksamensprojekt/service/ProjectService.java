@@ -20,7 +20,6 @@ public class ProjectService {
         projectRepository.createProject(project);
 
     }
-
     public List<Project> findProject() {
         return projectRepository.findAllProject();
     }

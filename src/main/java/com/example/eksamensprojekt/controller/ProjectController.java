@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -62,4 +64,28 @@ public class ProjectController implements ErrorController {
     public String getErrorPath() {
         return "/error";
     }
+
+
+    @GetMapping("/{projectName}/delete")
+    public String deleteProject(@PathVariable("projectName") String projectName) {
+        projectService.deleteProject(projectName);
+        return "redirect:/projects";
+    }
+
+    @GetMapping("/{projectName}/updateProject")
+    public String updateProject(@PathVariable("projectName") String projectName, Model model) {
+        Project project = projectService.findProjectByName(projectName);
+
+        model.addAttribute("updateObject", project);
+        // Tilføj andre relevante modelattributter efter behov
+        return "updateProject"; // Navnet på din HTML-skabelon til opdatering af projektet
+    }
+
+
+    @PostMapping("/updateProject")
+    public String updatedProject(@ModelAttribute Project updatedProject) {
+        projectService.updateProject(updatedProject.getProjectName(), updatedProject);
+        return "redirect:/projects";
+    }
+
 }

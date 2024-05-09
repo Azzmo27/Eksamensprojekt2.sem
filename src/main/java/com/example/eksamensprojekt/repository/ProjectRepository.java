@@ -8,19 +8,29 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-
 @Repository
 public class ProjectRepository {
     @Autowired
     private final JdbcTemplate template;
-    private ConnectionManager connectionManager;
 
     public ProjectRepository(JdbcTemplate template) {
         this.template = template;
     }
-public void createProject(Project project) {
-    String sql = "INSERT INTO project (projectName, description, startDate, endDate) VALUES (?, ?, ?, ?)";
-    template.update(sql, project.getProjectName(), project.getDescription(), project.getStartDate(), project.getEndDate());
+
+    public void createProject(Project project) {
+        String sql = "INSERT INTO project (projectName, description, startDate, endDate) VALUES (?, ?, ?, ?)";
+        template.update(sql, project.getProjectName(), project.getDescription(), project.getStartDate(), project.getEndDate());
+    }
+
+    public void updateProject(String name, Project updatedProject) {
+        String updateSql = "UPDATE project SET projectName = ?, description = ?, startDate = ?, endDate = ? WHERE projectName = ?";
+        template.update(updateSql , updatedProject.getProjectName(), updatedProject.getDescription(),
+                updatedProject.getStartDate(), updatedProject.getEndDate(), name);
+    }
+
+    public void deleteProject(String projectName) {
+        String deleteSql = "DELETE FROM project WHERE projectName = ?";
+        template.update(deleteSql, projectName);
     }
 
     public List<Project> findAllProject() {
@@ -30,9 +40,9 @@ public void createProject(Project project) {
     }
 
 
-
-
-
-
+    public Project findProjectByName(String name) {
+        String sql = "SELECT project_id, projectName, description, startDate, endDate FROM project WHERE projectName = ?";
+        RowMapper<Project> rowMapper = new BeanPropertyRowMapper<>(Project.class);
+        return template.queryForObject(sql, rowMapper, name);
+    }
 }
-

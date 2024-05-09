@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -17,13 +16,22 @@
         <th>Description</th>
         <th>Start Date</th>
         <th>End Date</th>
+        <th>Delete project</th>
+        <th>Update</th>
     </tr>
     <tr th:each="project : ${projects}">
         <td th:text="${project.project_id}"></td>
         <td th:text="${project.projectName}"></td>
         <td th:text="${project.description}"></td>
-        <td th:text="${#dates.format(project.startDate, 'yyyy-MM-dd')}"></td>
-        <td th:text="${#dates.format(project.endDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
+        <td>
+            <form th:action="@{/deleteProject}" method="post">
+                <input type="hidden" name="projectName" th:value="${project.projectName}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td><a th:href="@{'/updateProject/' + ${project.projectName}}">Update</a></td>
     </tr>
 </table>
 

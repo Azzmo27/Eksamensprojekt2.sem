@@ -20,13 +20,11 @@ public class Project {
         this.endDate = endDate;
 
     }
-
     public Project() {
 
     }
-
-    public int getProject_id() {
-        return project_id;
+    public int getProjectId() {
+        return projectId;
     }
 
 
