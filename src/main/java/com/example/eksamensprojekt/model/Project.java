@@ -1,28 +1,24 @@
 package com.example.eksamensprojekt.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
 
 public class Project {
 
     private int project_id;
     private String projectName;
     private String description;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private List<Subproject> subprojectList;
-    private List<Task> taskList;
+    private Date startDate;
+    private Date endDate;
 
 
-    public Project (int project_id, String ProjectName, String description, LocalDate startDate,LocalDate endDate){
+
+    public Project (int project_id, String ProjectName, String description, Date startDate, Date endDate){
         this.project_id = project_id;
         this.projectName = ProjectName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.subprojectList = new ArrayList<>();
-        this.taskList = new ArrayList<>();
+
     }
 
     public Project() {
@@ -52,40 +48,24 @@ public class Project {
     }
 
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate dateStart) {
+    public void setStartDate(Date dateStart) {
         this.startDate = dateStart;
     }
 
 
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate dateEnd) {
+    public void setEndDate(Date dateEnd) {
         this.endDate = dateEnd;
     }
 
 
-    public List<Subproject> getSubprojectList() {
-        return subprojectList;
-    }
-
-    public void setSubprojectList(List<Subproject> subprojectList) {
-        this.subprojectList = subprojectList;
-    }
-
-
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
 
 
 }

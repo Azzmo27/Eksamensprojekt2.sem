@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

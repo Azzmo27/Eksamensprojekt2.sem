@@ -1,27 +1,24 @@
 package com.example.eksamensprojekt.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.sql.Date;
 
 public class Subproject {
     private String subProjectName;
     private String subProjectDescription;
 
-    private LocalDate subProjectStartDate;
-    private LocalDate subProjectEndDate;
+    private Date subProjectStartDate;
+    private Date subProjectEndDate;
 
     private String subProjectStatus;
 
-    private List<Task> subprojectTask;
-
-    public Subproject(String subProjectName, String subProjectDescription, LocalDate subProjectStartDate, LocalDate subProjectEndDate, String subProjectStatus){
+    public Subproject(String subProjectName, String subProjectDescription, Date subProjectStartDate, Date subProjectEndDate, String subProjectStatus){
         this.subProjectName = subProjectName;
         this.subProjectDescription = subProjectDescription;
         this.subProjectStartDate = subProjectStartDate;
         this.subProjectEndDate = subProjectEndDate;
         this.subProjectStatus = subProjectStatus;
-        this.subprojectTask = new ArrayList<>();
+
     }
     public String getSubProjectName() {
         return subProjectName;
@@ -30,19 +27,19 @@ public class Subproject {
         return subProjectDescription;
     }
 
-    public LocalDate getSubProjectStartDate() {
+    public Date getSubProjectStartDate() {
         return subProjectStartDate;
     }
 
-    public void setSubProjectStartDate(LocalDate subProjectStartDate) {
+    public void setSubProjectStartDate(Date subProjectStartDate) {
         this.subProjectStartDate = subProjectStartDate;
     }
 
-    public LocalDate getSubProjectEndDate() {
+    public Date getSubProjectEndDate() {
         return subProjectEndDate;
     }
 
-    public void setSubProjectEndDate(LocalDate subProjectEndDate) {
+    public void setSubProjectEndDate(Date ubProjectEndDate) {
         this.subProjectEndDate = subProjectEndDate;
     }
 
@@ -54,13 +51,6 @@ public class Subproject {
         this.subProjectStatus = subProjectStatus;
     }
 
-    public List<Task> getSubprojectTask() {
-        return subprojectTask;
-    }
-
-    public void setSubprojectTask(List<Task> subprojectTask) {
-        this.subprojectTask = subprojectTask;
-    }
 
 }
 
