@@ -20,7 +20,7 @@
         <th>Update</th>
     </tr>
     <tr th:each="project : ${projects}">
-        <td th:text="${project.project_id}"></td>
+        <td th:text="${project.projectId}"></td>
         <td th:text="${project.projectName}"></td>
         <td th:text="${project.description}"></td>
         <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>

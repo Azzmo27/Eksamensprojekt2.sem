@@ -31,6 +31,11 @@ public class Subproject {
         return subProjectStartDate;
     }
 
+    public LocalDate getSubProjectEndDate() {
+        return subProjectEndDate;
+    }
+
+
     public void setSubProjectStartDate(Date subProjectStartDate) {
         this.subProjectStartDate = subProjectStartDate;
     }

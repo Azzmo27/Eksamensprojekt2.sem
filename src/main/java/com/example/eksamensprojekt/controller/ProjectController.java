@@ -36,15 +36,15 @@ public class ProjectController implements ErrorController {
     }
 
     @GetMapping("/create")
-    public String CreateProject(Model model) {
-        Project project = new Project();
+    public String createProjectForm(Model model) {
+        model.addAttribute("project", new Project());
         return "create";
     }
 
     @PostMapping("/create")
     public String createProject(Project project, RedirectAttributes redirectAttributes) {
         projectService.createProject(project);
-        return "redirect:/showProjects";
+        return "redirect:/showProject";
     }
 
     @GetMapping("/showProject")
@@ -54,15 +54,9 @@ public class ProjectController implements ErrorController {
         return "showProject";
     }
 
-    // Handle errors
     @GetMapping("/error")
     public String handleError() {
-        return "/error";
-    }
-
-    @GetMapping("/error")
-    public String getErrorPath() {
-        return "/error";
+        return "errorPage";
     }
 
 
@@ -89,3 +83,4 @@ public class ProjectController implements ErrorController {
     }
 
 }
+

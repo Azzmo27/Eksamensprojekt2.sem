@@ -1,5 +1,6 @@
 package com.example.eksamensprojekt;
-
+import java.util.Arrays;
+import java.util.List;
 import com.example.eksamensprojekt.model.Project;
 import com.example.eksamensprojekt.repository.ProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +38,16 @@ public class ProjectRepositoryTest {
         assertEquals(LocalDate.of(2024, 12, 23), project.getStartDate());
         assertEquals(LocalDate.of(2025, 1, 23), project.getEndDate());
     }
-}
+
+    @Test
+    public void testFindAllProject() {
+        List<Project> expectedProjects = Arrays.asList(
+                new Project(1, "Project1", "Description1", LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10)),
+                new Project(2, "Project2", "Description2", LocalDate.of(2024, 5, 11), LocalDate.of(2024, 5, 12))
+        );
+
+
+}}
 
 
 

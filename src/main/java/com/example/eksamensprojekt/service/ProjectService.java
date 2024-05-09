@@ -23,4 +23,16 @@ public class ProjectService {
     public List<Project> findProject() {
         return projectRepository.findAllProject();
     }
+
+    public void updateProject(String name, Project updatedProject) {
+        projectRepository.updateProject(name, updatedProject);
+    }
+
+    public void deleteProject(String projectName) {
+        projectRepository.deleteProject(projectName);
+    }
+
+    public Project findProjectByName(String projectName) {
+        return projectRepository.findProjectByName(projectName);
+    }
 }

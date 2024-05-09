@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS subProject (
     subProject_id INT AUTO_INCREMENT PRIMARY KEY,
     subProjectName VARCHAR(255),
     subProjectDescription VARCHAR(255),
-    subProjectStartDate Date,
+    subProjectStartDate LocalDate,
     subProjectEndDate Date,
     subProjectStatus VARCHAR(255),
     project_id INT,
