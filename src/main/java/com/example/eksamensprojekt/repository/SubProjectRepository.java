@@ -22,9 +22,9 @@ public class SubProjectRepository {
     }
 
 
-    public void createSubProject(Subproject project) {
+    public void createSubProject(Subproject subProject) {
         String sql = "INSERT INTO subProject (subProjectName, subProjectDescription, subProjectStartDate, subProjectendDate) VALUES (?, ?, ?, ?)";
-        template.update(sql, Subproject.getProjectName(), project.getDescription(), project.getStartDate(), project.getEndDate());
+        template.update(sql, subProject.getSubProjectName(), subProject.getSubprojectDescription(), subProject.getSubProjectStartDate(), subProject.getSubProjectEndDate(), subProject.getSubProjectStatus());
     }
 
     public void updateSubProject(String name, Subproject updatedSubProject) {
@@ -33,9 +33,9 @@ public class SubProjectRepository {
                 updatedSubProject.getSubProjectStartDate(), updatedSubProject.getSubProjectEndDate(), name);
     }
 
-    public void deleteSubProject(String projectName) {
+    public void deleteSubProject(String SubprojectName) {
         String deleteSql = "DELETE FROM project WHERE projectName = ?";
-        template.update(deleteSql, projectName);
+        template.update(deleteSql, SubprojectName);
     }
 
     public List<Project> findAllSubProject() {
