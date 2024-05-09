@@ -34,8 +34,8 @@ public class ProjectRepositoryTest {
 
         assertEquals("Test name", project.getProjectName());
         assertEquals("Test description", project.getDescription());
-        assertEquals(LocalDate.of(2024, 12, 23), project.getStartDate());
-        assertEquals(LocalDate.of(2025, 1, 23), project.getEndDate());
+        assertEquals(Date.of(2024, 12, 23), project.getStartDate());
+        assertEquals(Date.of(2025, 1, 23), project.getEndDate());
     }
 }
 

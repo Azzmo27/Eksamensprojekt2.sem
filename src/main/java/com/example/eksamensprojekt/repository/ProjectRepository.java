@@ -18,7 +18,7 @@ public class ProjectRepository {
         this.template = template;
     }
 public void createProject(Project project) {
-    String sql = "INSERT INTO projects (projectName, description, startDate, endDate) VALUES (?, ?, ?, ?)";
+    String sql = "INSERT INTO project (projectName, description, startDate, endDate) VALUES (?, ?, ?, ?)";
     template.update(sql, project.getProjectName(), project.getDescription(), project.getStartDate(), project.getEndDate());
     }
 

@@ -10,34 +10,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.boot.web.servlet.error.ErrorController;
 
 import java.util.List;
 
 @Controller
-public class ProjectController {
+public class ProjectController implements ErrorController {
 
     private final ProjectService projectService;
     private final SubProjectService subProjectService;
-
     private final TaskService taskService;
 
     @Autowired
-    public ProjectController(ProjectService projectService,SubProjectService subProjectService,TaskService taskService){
-     this.projectService = projectService;
-     this.subProjectService = subProjectService;
-     this.taskService = taskService;
-
+    public ProjectController(ProjectService projectService, SubProjectService subProjectService, TaskService taskService) {
+        this.projectService = projectService;
+        this.subProjectService = subProjectService;
+        this.taskService = taskService;
     }
+
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 
     @GetMapping("/create")
-    public String CreateProject(Model model){
+    public String CreateProject(Model model) {
         Project project = new Project();
         return "create";
     }
+
     @PostMapping("/create")
     public String createProject(Project project, RedirectAttributes redirectAttributes) {
         projectService.createProject(project);
@@ -51,6 +52,14 @@ public class ProjectController {
         return "showProject";
     }
 
+    // Handle errors
+    @GetMapping("/error")
+    public String handleError() {
+        return "/error";
+    }
 
+    @GetMapping("/error")
+    public String getErrorPath() {
+        return "/error";
+    }
 }
-
