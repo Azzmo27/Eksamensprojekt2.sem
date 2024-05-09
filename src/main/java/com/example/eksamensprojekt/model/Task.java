@@ -5,12 +5,12 @@ import java.sql.Date;
 public class Task {
     private String taskName;
     private String taskDescription;
-    private Date taskStartDate;
-    private Date taskEndDate;
+    private LocalDate taskStartDate;
+    private LocalDate taskEndDate;
     private int timeEstimate;
 
 
-    public Task(String taskName, String taskDescription, Date taskStartDate, Date taskEndDate, int timeEstimate){
+    public Task(String taskName, String taskDescription, LocalDate taskStartDate, LocalDate taskEndDate, int timeEstimate){
         this.taskDescription = taskDescription;
         this.taskName = taskName;
         this.taskStartDate = taskStartDate;
@@ -25,10 +25,10 @@ public class Task {
         return taskDescription;
     }
 
-    public Date getTaskStartDate() {
+    public LocalDate getTaskStartDate() {
         return taskStartDate;
     }
-    public Date getTaskEndDate() {
+    public LocalDate getTaskEndDate() {
         return taskEndDate;
     }
     public int getTimeEstimate() {
@@ -43,11 +43,11 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public void setTaskEndDate(Date taskEndDate) {
+    public void setTaskEndDate(LocalDate taskEndDate) {
         this.taskEndDate = taskEndDate;
     }
 
-    public void setTaskStartDate(Date taskStartDate) {
+    public void setTaskStartDate(LocalDate taskStartDate) {
         this.taskStartDate = taskStartDate;
     }
 

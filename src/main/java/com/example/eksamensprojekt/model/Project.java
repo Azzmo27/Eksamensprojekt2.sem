@@ -1,19 +1,19 @@
 package com.example.eksamensprojekt.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Project {
 
-    private int project_id;
+    private int projectId;
     private String projectName;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
 
 
-    public Project (int project_id, String ProjectName, String description, Date startDate, Date endDate){
-        this.project_id = project_id;
+    public Project (int projectId, String ProjectName, String description, LocalDate startDate, LocalDate endDate){
+        this.projectId = projectId;
         this.projectName = ProjectName;
         this.description = description;
         this.startDate = startDate;
@@ -46,20 +46,20 @@ public class Project {
     }
 
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date dateStart) {
+    public void setStartDate(LocalDate dateStart) {
         this.startDate = dateStart;
     }
 
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date dateEnd) {
+    public void setEndDate(LocalDate dateEnd) {
         this.endDate = dateEnd;
     }
 

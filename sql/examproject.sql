@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS ExamProject_DB;
 USE ExamProject_DB;
 
 CREATE TABLE IF NOT EXISTS project (
-    project_id INT AUTO_INCREMENT PRIMARY KEY,
+    projectId INT AUTO_INCREMENT PRIMARY KEY,
     projectName VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     startDate Date,

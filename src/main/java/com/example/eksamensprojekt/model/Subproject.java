@@ -7,12 +7,12 @@ public class Subproject {
     private String subProjectName;
     private String subProjectDescription;
 
-    private Date subProjectStartDate;
-    private Date subProjectEndDate;
+    private LocalDate subProjectStartDate;
+    private LocalDate subProjectEndDate;
 
     private String subProjectStatus;
 
-    public Subproject(String subProjectName, String subProjectDescription, Date subProjectStartDate, Date subProjectEndDate, String subProjectStatus){
+    public Subproject(String subProjectName, String subProjectDescription, LocalDate subProjectStartDate, LocalDate subProjectEndDate, String subProjectStatus){
         this.subProjectName = subProjectName;
         this.subProjectDescription = subProjectDescription;
         this.subProjectStartDate = subProjectStartDate;
@@ -27,7 +27,7 @@ public class Subproject {
         return subProjectDescription;
     }
 
-    public Date getSubProjectStartDate() {
+    public LocalDate getSubProjectStartDate() {
         return subProjectStartDate;
     }
 
@@ -36,15 +36,12 @@ public class Subproject {
     }
 
 
-    public void setSubProjectStartDate(Date subProjectStartDate) {
+    public void setSubProjectStartDate(LocalDate subProjectStartDate) {
         this.subProjectStartDate = subProjectStartDate;
     }
 
-    public Date getSubProjectEndDate() {
-        return subProjectEndDate;
-    }
 
-    public void setSubProjectEndDate(Date ubProjectEndDate) {
+    public void setSubProjectEndDate(LocalDate subProjectEndDate) {
         this.subProjectEndDate = subProjectEndDate;
     }
 
