@@ -1,15 +1,16 @@
 package com.example.eksamensprojekt.model;
 import java.time.LocalDate;
+import java.sql.Date;
 
 public class Task {
     private String taskName;
     private String taskDescription;
-    private LocalDate taskStartDate;
-    private LocalDate taskEndDate;
+    private Date taskStartDate;
+    private Date taskEndDate;
     private int timeEstimate;
 
 
-    public Task(String taskName, String taskDescription, LocalDate taskStartDate, LocalDate taskEndDate, int timeEstimate){
+    public Task(String taskName, String taskDescription, Date taskStartDate, Date taskEndDate, int timeEstimate){
         this.taskDescription = taskDescription;
         this.taskName = taskName;
         this.taskStartDate = taskStartDate;
@@ -24,10 +25,10 @@ public class Task {
         return taskDescription;
     }
 
-    public LocalDate getTaskStartDate() {
+    public Date getTaskStartDate() {
         return taskStartDate;
     }
-    public LocalDate getTaskEndDate() {
+    public Date getTaskEndDate() {
         return taskEndDate;
     }
     public int getTimeEstimate() {
@@ -42,11 +43,11 @@ public class Task {
         this.taskDescription = taskDescription;
     }
 
-    public void setTaskEndDate(LocalDate taskEndDate) {
+    public void setTaskEndDate(Date taskEndDate) {
         this.taskEndDate = taskEndDate;
     }
 
-    public void setTaskStartDate(LocalDate taskStartDate) {
+    public void setTaskStartDate(Date taskStartDate) {
         this.taskStartDate = taskStartDate;
     }
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class ProjectRepository {
     @Autowired
     private final JdbcTemplate template;
+    private ConnectionManager connectionManager;
 
     public ProjectRepository(JdbcTemplate template) {
         this.template = template;
@@ -27,6 +28,10 @@ public void createProject(Project project) {
         RowMapper<Project> rowMapper = new BeanPropertyRowMapper<>(Project.class);
         return template.query(sql, rowMapper);
     }
+
+
+
+
 
 
 }

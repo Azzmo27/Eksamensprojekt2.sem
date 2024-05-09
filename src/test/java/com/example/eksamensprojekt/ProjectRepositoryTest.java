@@ -29,8 +29,8 @@ public class ProjectRepositoryTest {
         Project project = new Project();
         project.setProjectName("Test name");
         project.setDescription("Test description");
-        project.setStartDate(LocalDate.of(2024, 12, 23));
-        project.setEndDate(LocalDate.of(2025, 1, 23));
+        project.setStartDate(Date.of(2024, 12, 23));
+        project.setEndDate(Date.of(2025, 1, 23));
 
         assertEquals("Test name", project.getProjectName());
         assertEquals("Test description", project.getDescription());
