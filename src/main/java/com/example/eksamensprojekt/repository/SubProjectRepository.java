@@ -38,15 +38,15 @@ public class SubProjectRepository {
         template.update(deleteSql, projectName);
     }
 
-    public List<Project> findAllProject() {
-        String sql = "SELECT project_id, projectName, description, startDate, endDate FROM project";
+    public List<Project> findAllSubProject() {
+        String sql = "SELECT subProject_id, subProjectName, subProjectDescription, subProjectStartDate, subProjectendDate FROM subProject";
         RowMapper<Project> rowMapper = new BeanPropertyRowMapper<>(Project.class);
         return template.query(sql, rowMapper);
     }
 
 
-    public Project findProjectByName(String name) {
-        String sql = "SELECT project_id, projectName, description, startDate, endDate FROM project WHERE projectName = ?";
+    public Project findSubProjectByName(String name) {
+        String sql = "SELECT subProject_id, subProjectName, subProjectdescription, subProjectStartDate, subProjectendDate FROM subProjec WHERE subProjectName = ?";
         RowMapper<Project> rowMapper = new BeanPropertyRowMapper<>(Project.class);
         return template.queryForObject(sql, rowMapper, name);
     }
