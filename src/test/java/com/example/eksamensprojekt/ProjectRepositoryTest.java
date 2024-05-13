@@ -11,8 +11,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.time.LocalDate;
-
+import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.times;
 
 public class ProjectRepositoryTest {
     @Mock
@@ -47,7 +49,31 @@ public class ProjectRepositoryTest {
         );
 
 
-}}
+    }
+
+    @Test
+    public void testEditProject() {
+
+        String projectName = "Project1";
+        Project editedProject = new Project(1, "UpdatedProject1", "UpdatedDescription1", LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10));
+        String editSql = "UPDATE project SET projectName = ?, description = ?, startDate = ?, endDate = ? WHERE projectName = ?";
+
+
+        projectRepository.editProject(projectName, editedProject);
+
+        verify(jdbcTemplate, times(1)).update(editSql,
+                editedProject.getProjectName(),
+                editedProject.getDescription(),
+                editedProject.getStartDate(),
+                editedProject.getEndDate(),
+                projectName);
+    }
+}
+
+
+
+
+
 
 
 

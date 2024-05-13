@@ -10,8 +10,6 @@ public class Project {
     private LocalDate startDate;
     private LocalDate endDate;
 
-
-
     public Project (int projectId, String ProjectName, String description, LocalDate startDate, LocalDate endDate){
         this.projectId = projectId;
         this.projectName = ProjectName;

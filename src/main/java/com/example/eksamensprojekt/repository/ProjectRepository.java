@@ -22,10 +22,10 @@ public class ProjectRepository {
         template.update(sql, project.getProjectName(), project.getDescription(), project.getStartDate(), project.getEndDate());
     }
 
-    public void updateProject(String name, Project updatedProject) {
-        String updateSql = "UPDATE project SET projectName = ?, description = ?, startDate = ?, endDate = ? WHERE projectName = ?";
-        template.update(updateSql , updatedProject.getProjectName(), updatedProject.getDescription(),
-                updatedProject.getStartDate(), updatedProject.getEndDate(), name);
+    public void editProject(String name, Project editProject) {
+        String editSql = "UPDATE project SET projectName = ?, description = ?, startDate = ?, endDate = ? WHERE projectName = ?";
+        template.update(editSql , editProject.getProjectName(), editProject.getDescription(),
+                editProject.getStartDate(), editProject.getEndDate(), name);
     }
 
     public void deleteProject(String projectName) {

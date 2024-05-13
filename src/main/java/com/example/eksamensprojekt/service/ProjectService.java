@@ -24,8 +24,8 @@ public class ProjectService {
         return projectRepository.findAllProject();
     }
 
-    public void updateProject(String name, Project updatedProject) {
-        projectRepository.updateProject(name, updatedProject);
+    public void editProject(String name, Project editProject) {
+        projectRepository.editProject(name, editProject);
     }
 
     public void deleteProject(String projectName) {
@@ -35,4 +35,6 @@ public class ProjectService {
     public Project findProjectByName(String projectName) {
         return projectRepository.findProjectByName(projectName);
     }
+
+
 }
