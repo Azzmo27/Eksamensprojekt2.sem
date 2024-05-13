@@ -35,7 +35,7 @@ public class SubProjectRepository {
     }
 
     public void deleteSubProject(String SubprojectName) {
-        String deleteSql = "DELETE FROM project WHERE projectName = ?";
+        String deleteSql = "DELETE FROM subProject WHERE subProjectName = ?";
         template.update(deleteSql, SubprojectName);
     }
 

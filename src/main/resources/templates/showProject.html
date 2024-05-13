@@ -17,7 +17,7 @@
         <th>Start Date</th>
         <th>End Date</th>
         <th>Delete project</th>
-        <th>Update</th>
+        <th>Edit project</th>
     </tr>
     <tr th:each="project : ${projects}">
         <td th:text="${project.projectId}"></td>
@@ -26,12 +26,12 @@
         <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
         <td>
-            <form th:action="@{/deleteProject}" method="post">
-                <input type="hidden" name="projectName" th:value="${project.projectName}" />
+            <form th:action="@{'/' + ${project.projectName} + '/delete'}" method="post">
+            <input type="hidden" name="_method" value="delete" />
                 <button type="submit">Delete</button>
             </form>
         </td>
-        <td><a th:href="@{'/updateProject/' + ${project.projectName}}">Update</a></td>
+        <td><a th:href="@{'/' + ${project.projectName} + '/editProject'}">Edit</a></td>
     </tr>
 </table>
 
