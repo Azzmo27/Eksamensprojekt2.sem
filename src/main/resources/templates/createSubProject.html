@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+    <title>Create Subproject</title>
+</head>
+<body>
+<h2>Create Subproject</h2>
+    <label for="subProjectName">Subproject Name:</label><br>
+    <input type="text" id="subProjectName" name="subProjectName"><br>
+
+    <label for="subProjectDescription">Description:</label><br>
+    <textarea id="subProjectDescription" name="subProjectDescription" rows="4" cols="50"></textarea><br>
+
+    <label for="subProjectStartDate">Start Date:</label><br>
+    <input type="date" id="subProjectStartDate" name="subProjectStartDate"><br>
+
+    <label for="subProjectEndDate">End Date:</label><br>
+    <input type="date" id="subProjectEndDate" name="subProjectEndDate"><br>
+
+    <label for="subProjectStatus">Status:</label><br>
+    <input type="text" id="subProjectStatus" name="subProjectStatus"><br>
+
+    <input type="submit" value="Create Subproject">
+</form>
+</body>
+</html>
