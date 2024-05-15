@@ -1,5 +1,4 @@
 package com.example.eksamensprojekt.controller;
-
 import com.example.eksamensprojekt.model.Project;
 import com.example.eksamensprojekt.model.Subproject;
 import com.example.eksamensprojekt.repository.SubProjectRepository;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
-
 import java.util.List;
 
 @Controller
@@ -80,28 +78,45 @@ public class ProjectController implements ErrorController {
         return "redirect:/showProject";
     }
 
-
     @PostMapping("/createSubProject")
-    public String createSubProject(@ModelAttribute("subProject") Subproject subProject, SubProjectService subProjectService) {
+    public String createSubProject(@ModelAttribute("subProject") Subproject subProject) {
         subProjectService.createSubProject(subProject);
-        return "redirect:/showProject";
+        return "redirect:/createSubProject";
     }
 
     @PostMapping("/deleteSubProject/{subProjectName}")
     public String deleteSubProject(@PathVariable String subProjectName) {
+        Subproject deletedSubproject = subProjectService.findSubProjectByName(subProjectName);
+        String projectName = deletedSubproject.getSubProjectName();
         subProjectService.deleteSubProject(subProjectName);
-        return "redirect:/showProject";
+        return "redirect:/chosenProject/" + projectName;
     }
 
     @GetMapping("/{subProjectName}/editSubProject")
     public String editSubProject(@PathVariable("subProjectName") String subProjectName, Model model) {
         Subproject project = subProjectService.findSubProjectByName(subProjectName);
         model.addAttribute("editSubProject", project);
-        return "redirect:/showProject";
+        String projectName = project.getSubProjectName();
+        return "redirect:/chosenProject/" + projectName;
     }
 
-
+    @GetMapping("/chosenProject/{projectName}")
+    public String showChosenProject(@PathVariable("projectName") String projectName, Model model) {
+        Project chosenProject = projectService.findProjectByName(projectName);
+        List<Subproject> subprojects = subProjectService.findAllSubProject();
+        model.addAttribute("chosenProject", chosenProject);
+        model.addAttribute("subprojects", subprojects);
+        return "chosenProject";
     }
+
+    @GetMapping("/chosenProject/{projectName}/createSubproject")
+    public String createSubProject(@PathVariable("projectName") String projectName, Model model) {
+        Project chosenProject = projectService.findProjectByName(projectName);
+        model.addAttribute("chosenProject", chosenProject);
+        return "chosenProject";
+    }
+
+}
 
 
 

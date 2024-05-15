@@ -20,6 +20,11 @@ public class Subproject {
         this.subProjectStatus = subProjectStatus;
 
     }
+
+    public Subproject() {
+
+    }
+
     public String getSubProjectName() {
         return subProjectName;
     }
@@ -34,13 +39,9 @@ public class Subproject {
     public LocalDate getSubProjectEndDate() {
         return subProjectEndDate;
     }
-
-
     public void setSubProjectStartDate(LocalDate subProjectStartDate) {
         this.subProjectStartDate = subProjectStartDate;
     }
-
-
     public void setSubProjectEndDate(LocalDate subProjectEndDate) {
         this.subProjectEndDate = subProjectEndDate;
     }
@@ -51,6 +52,14 @@ public class Subproject {
 
     public void setSubProjectStatus(String subProjectStatus) {
         this.subProjectStatus = subProjectStatus;
+    }
+
+
+    public void setSubProjectName(String subProjectName) {
+        this.subProjectName = subProjectName;
+    }
+    public void setSubProjectDescription(String subProjectDescription){
+        this.subProjectDescription = subProjectDescription;
     }
 
 

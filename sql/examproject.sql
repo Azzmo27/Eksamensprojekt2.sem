@@ -10,17 +10,16 @@ CREATE TABLE IF NOT EXISTS project (
     endDate date
 );
 
-
 CREATE TABLE IF NOT EXISTS subProject (
     subProject_id INT AUTO_INCREMENT PRIMARY KEY,
     subProjectName VARCHAR(255),
     subProjectDescription VARCHAR(255),
-    subProjectStartDate LocalDate,
+    subProjectStartDate Date,
     subProjectEndDate Date,
     subProjectStatus VARCHAR(255),
-    project_id INT,
-    FOREIGN KEY (project_id) REFERENCES project (project_id)
-);
+    projectId INT,
+    FOREIGN KEY (projectId) REFERENCES project (projectId)
+    );
 
 CREATE TABLE IF NOT EXISTS task (
     Task_id INT AUTO_INCREMENT PRIMARY KEY,

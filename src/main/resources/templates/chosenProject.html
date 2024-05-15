@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chosen Project Details</title>
+</head>
+<body>
+<h2>Chosen Project Details</h2>
+<h3>Project Details</h3>
+<p th:if="${chosenProject != null}">Project ID: <span th:text="${chosenProject.projectId}"></span></p>
+<p th:if="${chosenProject != null}">Project Name: <span th:text="${chosenProject.projectName}"></span></p>
+<p th:if="${chosenProject != null}">Description: <span th:text="${chosenProject.description}"></span></p>
+<p th:if="${chosenProject != null}">Start Date: <span th:text="${#temporals.format(chosenProject.startDate, 'yyyy-MM-dd')}"></span></p>
+<p th:if="${chosenProject != null}">End Date: <span th:text="${#temporals.format(chosenProject.endDate, 'yyyy-MM-dd')}"></span></p>
+
+<h3>Subprojects</h3>
+<table border="1">
+    <tr>
+        <th>Subproject Name</th>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
+    </tr>
+    <tr th:each="subproject : ${subprojects}">
+        <td th:text="${subproject.subProjectName}"></td>
+        <td th:text="${subproject.subprojectDescription}"></td>
+        <td th:text="${#temporals.format(subproject.subProjectStartDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(subproject.subProjectEndDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${subproject.subProjectStatus}"></td>
+    </tr>
+</table>
+
+<a
+
+   th:href="@{'/chosenProject/' + ${chosenProject.projectName} + '/createSubproject'}">
+    <button type="button">Create New Subproject</button>
+</a>
+</body>
+</html>
