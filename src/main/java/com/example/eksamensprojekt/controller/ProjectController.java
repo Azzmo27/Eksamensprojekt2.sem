@@ -29,11 +29,12 @@ public class ProjectController implements ErrorController {
     private final SubProjectRepository subProjectRepository;
 
     @Autowired
-    public ProjectController(ProjectService projectService, SubProjectService subProjectService, TaskService taskService, SubProjectRepository subProjectRepository) {
+    public ProjectController(ProjectService projectService, SubProjectService subProjectService, TaskService taskService,UserService userService, SubProjectRepository subProjectRepository) {
         this.projectService = projectService;
         this.subProjectService = subProjectService;
         this.taskService = taskService;
         this.subProjectRepository = subProjectRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/")

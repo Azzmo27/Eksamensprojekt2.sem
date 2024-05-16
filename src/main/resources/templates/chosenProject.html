@@ -32,7 +32,11 @@
         <td th:text="${subProject.subProjectStatus}"></td>
         <td>
             <a th:href="@{'/subproject/details/' + ${subProject.subProjectName}}">Se detaljer</a> |
-            <a th:href="@{'/subproject/deleteSubProject/' + ${subProject.subProjectName}}">Slet</a> |
+
+            <form th:action="@{'/subproject/deleteSubProject/' + ${subProject.subProjectName}}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette underprojektet?');">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Slet</button>
+            </form> |
             <a th:href="@{'/editSubProject/' + ${subProject.subProjectName}}">Rediger</a>
 
 
