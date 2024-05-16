@@ -1,6 +1,6 @@
 package com.example.eksamensprojekt.model;
 import java.time.LocalDate;
-import java.sql.Date;
+
 
 public class Task {
     private String taskName;
@@ -16,6 +16,9 @@ public class Task {
         this.taskStartDate = taskStartDate;
         this.taskEndDate = taskEndDate;
         this.timeEstimate = timeEstimate;
+
+    }
+    public Task() {
 
     }
     public String getTaskName() {

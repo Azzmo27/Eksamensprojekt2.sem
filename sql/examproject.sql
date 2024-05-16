@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS subProject (
     subProjectStatus VARCHAR(255),
     projectId INT,
     FOREIGN KEY (projectId) REFERENCES project (projectId)
-    );
+);
 
 CREATE TABLE IF NOT EXISTS task (
     Task_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,4 +29,16 @@ CREATE TABLE IF NOT EXISTS task (
     timeEstimate INT,
     subProject_id INT,
     FOREIGN KEY (subProject_id) REFERENCES subProject(subProject_id)
+);
+
+CREATE TABLE IF NOT EXISTS user (
+    userName INT AUTO_INCREMENT PRIMARY KEY,
+    userPassword INT,
+    firstname VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    userId INT,
+    FOREIGN KEY (userId) REFERENCES User(userId)
+
 );
