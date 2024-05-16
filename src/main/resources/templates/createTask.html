@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+    <title>Opret task</title>
+</head>
+<body>
+<h2>Opret task</h2>
+<form action="/tasks/createTask" method="post">
+    <label for="taskName">Navn:</label><br>
+    <input type="text" id="taskName" name="taskName"><br>
+
+    <label for="taskDescription">Beskrivelse:</label><br>
+    <textarea id="taskDescription" name="taskDescription" rows="4" cols="50"></textarea><br>
+
+    <label for="taskStartDate">Start Dato:</label><br>
+    <input type="date" id="taskStartDate" name="taskStartDate"><br>
+
+    <label for="taskEndDate">Slut Dato:</label><br>
+    <input type="date" id="taskEndDate" name="taskEndDate"><br>
+
+    <label for="timeEstimate">Tids Estimat (timer):</label><br>
+    <input type="number" id="timeEstimate" name="timeEstimate" placeholder="Indtast tids estimat i timer" min="0" step="0.5" required><br>
+
+
+    <input type="submit" value="Opret task">
+
+</form>
+</body>
+</html>

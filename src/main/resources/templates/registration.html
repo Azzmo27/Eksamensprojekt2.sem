@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrering</title>
+    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+</head>
+<body>
+<div id="menuHeader">
+    Alpha Solution
+</div>
+<div class="container">
+    <div class="card">
+        <div class="inner-box">
+            <div class="card-front"> </div>
+            <h1 style="text-shadow: 2px 2px 4px gray;">REGISTRER DIG HER</h1>
+            <form action="/newRegistration" method="post">
+                <input type="text" name="first_name" class="input-box" placeholder="Fornavn" required> <br> <br>
+                <input type="text" name="last_name" class="input-box" placeholder="Efternavn" required>  <br> <br>
+                <input type="email" name="username" class="input-box" placeholder="Email" required>  <br> <br>
+                <input type="password" name="user_password" class="input-box" placeholder="Adgangskode" required> <br> <br>
+                <select name="role" class="input-box" required>
+                    <option value="" disabled selected>Vælg din rolle</option>
+                    <option value="PROJECT_LEADER">Projektleder</option>
+                    <option value="DEVELOPER">Udvikler</option>
+                    <option value="ADMIN">Admin</option>
+                </select> <br> <br>
+                <button type="submit" class="submit-btn">Tilmeld</button> <br> <br>
+            </form>
+            <br>
+            <td>
+                <a href="/">
+                    <button type="button" class="btn-2">Tilbage til login</button>
+                </a>
+            </td>
+        </div>
+    </div>
+</div>
+</body>
+</html>

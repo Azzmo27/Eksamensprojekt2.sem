@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+    <style>
+        header {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Alpha solution</h1>
+</header>
+
+<main class="container">
+    <div class="card">
+        <div class="inner-box">
+            <div class="card-front"></div>
+            <h2>LOG IND</h2>
+
+            <form action="/login" method="post">
+                <label for="username">Email:</label>
+                <input type="email" id="username" class="input-box" name="username" placeholder="Email" required><br><br>
+
+                <label for="user_password">Adgangskode:</label>
+                <input type="password" id="user_password" class="input-box" name="user_password" placeholder="Adgangskode" required>
+
+                <button type="submit" class="submit-btn">LOG IND</button><br><br><br><br><br><br><br>
+            </form>
+
+            <p>
+                Har du ikke en konto? <a href="/registration">Tilmeld dig</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+</body>
+</html>
