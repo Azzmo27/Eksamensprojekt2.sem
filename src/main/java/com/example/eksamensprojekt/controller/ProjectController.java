@@ -1,10 +1,13 @@
 package com.example.eksamensprojekt.controller;
 import com.example.eksamensprojekt.model.Project;
 import com.example.eksamensprojekt.model.Subproject;
+import com.example.eksamensprojekt.model.Task;
+import com.example.eksamensprojekt.model.User;
 import com.example.eksamensprojekt.repository.SubProjectRepository;
 import com.example.eksamensprojekt.service.ProjectService;
 import com.example.eksamensprojekt.service.SubProjectService;
 import com.example.eksamensprojekt.service.TaskService;
+import com.example.eksamensprojekt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import java.util.List;
+import java.sql.SQLException;
 
 @Controller
 public class ProjectController implements ErrorController {
@@ -19,6 +23,8 @@ public class ProjectController implements ErrorController {
     private final ProjectService projectService;
     private final SubProjectService subProjectService;
     private final TaskService taskService;
+
+    private final UserService userService;
 
     private final SubProjectRepository subProjectRepository;
 
@@ -98,14 +104,13 @@ public class ProjectController implements ErrorController {
         return "redirect:/chosenProject/" + projectName;
     }
 
-    @PostMapping("/editSubProject/{subProjectName}")
+    @GetMapping("/editSubProject/{subProjectName}")
     public String editSubProject(@PathVariable String subProjectName, @RequestParam("projectName") String projectName, Model model) {
         Subproject project = subProjectService.findSubProjectByName(subProjectName);
         model.addAttribute("editSubProject", project);
-        return "redirect:/chosenProject/" + projectName;
+        System.out.println("found subproject" + model);
+        return "editSubProject";
     }
-
-
 
     @GetMapping("/chosenProject/{projectName}")
     public String showChosenProject(@PathVariable("projectName") String projectName, Model model) {
@@ -115,6 +120,73 @@ public class ProjectController implements ErrorController {
         model.addAttribute("subprojects", subprojects);
         return "chosenProject";
     }
+    @GetMapping("/createTask")
+    public String showCreateTaskForm(Model model) {
+        model.addAttribute("task", new Task());
+        return "showTask";
+    }
+
+    @PostMapping("/createTask")
+    public String createTask(@ModelAttribute("task") Task task) {
+        taskService.createTask(task);
+        return "redirect:/tasks/createTask";
+    }
+    @GetMapping("/showTasks")
+    public String showTasks(Model model) {
+        List<Task> tasks = taskService.findAllTasks();
+        model.addAttribute("tasks", tasks);
+        return "showTasks";
+    }
+
+    @PostMapping("/tasks/{taskName}/delete")
+    public String deleteTaskByName(@PathVariable("taskName") String taskName) {
+        taskService.deleteTask(taskName);
+        return "redirect:/showTasks";
+    }
+
+    @GetMapping("/tasks/{taskName}/editTask")
+    public String editTask(@PathVariable("taskName") String taskName, Model model) {
+        Task task = taskService.findTaskByName(taskName);
+        model.addAttribute("editTask", task);
+        return "editTask";
+    }
+    @PostMapping("/editTask")
+    public String editTask(@ModelAttribute Task editTask) {
+        taskService.editTask(editTask.getTaskName(), editTask);
+        return "redirect:/showTask";
+
+    }
+    @GetMapping("/")
+    public String frontPage() {
+        return "login";
+    }
+
+    @GetMapping("/registration")
+    public String registrationSection() {
+        return "registration";
+    }
+
+    @PostMapping("/newRegistration")
+    public String newRegistration(@ModelAttribute User user, @RequestParam("username") String username,
+                                  @RequestParam("user_password") String user_password) throws SQLException {
+        userService.createNewUser(user);
+        int userId = userService.getUserId(username, user_password);
+        return "index";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam("username") String username, @RequestParam("user_password")
+    String user_password, Model model) throws SQLException {
+        model.addAttribute("user", userService.verifyUserLogin(username, user_password));
+
+        if (userService.verifyUserLogin(username, user_password)) {
+            int userId = userService.getUserId(username, user_password);
+            return "redirect:/index";
+        } else {
+            return "login";
+        }
+    }
+
 
 }
 

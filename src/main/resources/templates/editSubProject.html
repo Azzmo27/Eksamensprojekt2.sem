@@ -13,7 +13,7 @@
 <p th:if="${editSubProject != null}">Start Date: <span th:text="${#temporals.format(editSubProject.subProjectStartDate, 'yyyy-MM-dd')}"></span></p>
 <p th:if="${editSubProject != null}">End Date: <span th:text="${#temporals.format(editSubProject.subProjectEndDate, 'yyyy-MM-dd')}"></span></p>
 
-<form th:action="@{/subproject/editSubProject/{subProjectName}(subProjectName=${editSubProject.subProjectName})}" th:object="${editSubProject}" method="post">
+<form th:action="@{/subproject/editSubProject}" th:object="${editSubProject}" method="GET">
     <input type="hidden" name="subProjectName" th:value="${editSubProject.subProjectName}" />
     <input type="hidden" name="projectName" th:value="${editSubProject.projectName}" />
     <label for="subProjectDescription">Description:</label><br>
