@@ -22,14 +22,12 @@ public class ProjectRepository {
             stmt.setString(1, project.getProjectName());
             stmt.setString(2, project.getDescription());
 
-            // Null check for startDate
             if (project.getStartDate() != null) {
                 stmt.setDate(3, java.sql.Date.valueOf(project.getStartDate()));
             } else {
                 stmt.setNull(3, Types.DATE);// Set as NULL in database if startDate is null
             }
 
-            // Null check for endDate
             if (project.getEndDate() != null) {
                 stmt.setDate(4, java.sql.Date.valueOf(project.getEndDate()));
             } else {
@@ -50,14 +48,12 @@ public class ProjectRepository {
             stmt.setString(1, editProject.getProjectName());
             stmt.setString(2, editProject.getDescription());
 
-            // Null check for startDate
             if (editProject.getStartDate() != null) {
                 stmt.setDate(3, java.sql.Date.valueOf(editProject.getStartDate()));
             } else {
                 stmt.setNull(3, Types.DATE);// Set as NULL in database if startDate is null
             }
 
-            // Null check for endDate
             if (editProject.getEndDate() != null) {
                 stmt.setDate(4, java.sql.Date.valueOf(editProject.getEndDate()));
             } else {
@@ -98,7 +94,7 @@ public class ProjectRepository {
                 project.setProjectName(rs.getString("projectName"));
                 project.setDescription(rs.getString("description"));
 
-                // Null check for startDate and endDate
+
                 if (rs.getDate("startDate") != null) {
                     project.setStartDate(rs.getDate("startDate").toLocalDate());
                 }
@@ -128,7 +124,7 @@ public class ProjectRepository {
                     project.setProjectName(rs.getString("projectName"));
                     project.setDescription(rs.getString("description"));
 
-// Null check for startDate and endDate
+
                     if (rs.getDate("startDate") != null) {
                         project.setStartDate(rs.getDate("startDate").toLocalDate());
                     }

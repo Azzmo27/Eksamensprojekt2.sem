@@ -8,7 +8,7 @@
 <body>
 <h2>Create Subproject</h2>
 <div class="container">
-    <form action="/createdSubProject" method="post" th:object="${subProject}">
+    <form action="/createdSubProject" method="POST" th:object="${subProject}">
 
         <p>
             <label for="subProjectName">Name of Subproject</label><br>
@@ -39,9 +39,11 @@
     </form>
 </div>
 
-<a th:href="@{'/chosenProject'}">
+<a th:if="${chosenProject != null}" th:href="@{'/chosenProject/' + ${chosenProject.projectName}}">
     <button type="button">Back to Chosen Project</button>
 </a>
+
+
 
 </body>
 </html>

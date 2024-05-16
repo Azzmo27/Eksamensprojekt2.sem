@@ -77,20 +77,18 @@ public class ProjectController implements ErrorController {
         projectService.editProject(editProject.getProjectName(), editProject);
         return "redirect:/showProject";
     }
+    @GetMapping("/createSubProject")
+    public String showCreateSubProjectForm(Model model) {
+        model.addAttribute("subProject", new Subproject());
+        return "createSubProject";
+    }
+
     @PostMapping("/createdSubProject")
     public String createSubProject(@ModelAttribute("subProject") Subproject subProject) {
+        System.out.println(subProject);
         subProjectService.createSubProject(subProject);
-        // Redirecting back to chosenProject page
-        return "redirect:/chosenProject/" + subProject.getSubProjectName();
+        return "redirect:/chosenProject/" + subProject;
     }
-
-    @PostMapping("/chosenProject/{projectName}/createSubproject")
-    public String createSubProject(@PathVariable("projectName") String projectName, Model model) {
-        Project chosenProject = projectService.findProjectByName(projectName);
-        model.addAttribute("chosenProject", chosenProject);
-        return "chosenProject"; // Return to chosenProject page
-    }
-
 
     @PostMapping("/deleteSubProject/{subProjectName}")
     public String deleteSubProject(@PathVariable String subProjectName) {
@@ -100,13 +98,14 @@ public class ProjectController implements ErrorController {
         return "redirect:/chosenProject/" + projectName;
     }
 
-    @GetMapping("/{subProjectName}/editSubProject")
-    public String editSubProject(@PathVariable("subProjectName") String subProjectName, Model model) {
+    @PostMapping("/editSubProject/{subProjectName}")
+    public String editSubProject(@PathVariable String subProjectName, @RequestParam("projectName") String projectName, Model model) {
         Subproject project = subProjectService.findSubProjectByName(subProjectName);
         model.addAttribute("editSubProject", project);
-        String projectName = project.getSubProjectName();
         return "redirect:/chosenProject/" + projectName;
     }
+
+
 
     @GetMapping("/chosenProject/{projectName}")
     public String showChosenProject(@PathVariable("projectName") String projectName, Model model) {
@@ -114,13 +113,6 @@ public class ProjectController implements ErrorController {
         List<Subproject> subprojects = subProjectService.findAllSubProject();
         model.addAttribute("chosenProject", chosenProject);
         model.addAttribute("subprojects", subprojects);
-        return "chosenProject";
-    }
-
-    @GetMapping("/chosenProject/{projectName}/createSubproject")
-    public String createSubProject(@PathVariable("projectName") String projectName, Model model) {
-        Project chosenProject = projectService.findProjectByName(projectName);
-        model.addAttribute("chosenProject", chosenProject);
         return "chosenProject";
     }
 

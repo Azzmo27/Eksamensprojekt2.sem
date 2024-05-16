@@ -6,22 +6,23 @@
     <title>Chosen Project Details</title>
 </head>
 <body>
-<h2>Chosen Project Details</h2>
-<h3>Project Details</h3>
-<p th:if="${chosenProject != null}">Project ID: <span th:text="${chosenProject.projectId}"></span></p>
-<p th:if="${chosenProject != null}">Project Name: <span th:text="${chosenProject.projectName}"></span></p>
-<p th:if="${chosenProject != null}">Description: <span th:text="${chosenProject.description}"></span></p>
-<p th:if="${chosenProject != null}">Start Date: <span th:text="${#temporals.format(chosenProject.startDate, 'yyyy-MM-dd')}"></span></p>
-<p th:if="${chosenProject != null}">End Date: <span th:text="${#temporals.format(chosenProject.endDate, 'yyyy-MM-dd')}"></span></p>
+<h2>Valgte projekt detaljer</h2>
+<h3>Projekt detaljer</h3>
+<p th:if="${chosenProject != null}">Projekt ID: <span th:text="${chosenProject.projectId}"></span></p>
+<p th:if="${chosenProject != null}">Projektnavn: <span th:text="${chosenProject.projectName}"></span></p>
+<p th:if="${chosenProject != null}">Beskrivelse: <span th:text="${chosenProject.description}"></span></p>
+<p th:if="${chosenProject != null}">Startdato: <span th:text="${#temporals.format(chosenProject.startDate, 'yyyy-MM-dd')}"></span></p>
+<p th:if="${chosenProject != null}">Slutdato: <span th:text="${#temporals.format(chosenProject.endDate, 'yyyy-MM-dd')}"></span></p>
 
-<h3>Subprojects</h3>
+<h3>Underprojekter</h3>
 <table border="1">
     <tr>
-        <th>Subproject Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
+        <th>Underprojektnavn</th>
+        <th>Beskrivelse</th>
+        <th>Startdato</th>
+        <th>Slutdato</th>
         <th>Status</th>
+        <th>Handlinger</th>
     </tr>
     <tr th:each="subProject : ${subprojects}">
         <td th:text="${subProject.subProjectName}"></td>
@@ -29,11 +30,20 @@
         <td th:text="${#temporals.format(subProject.subProjectStartDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(subProject.subProjectEndDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${subProject.subProjectStatus}"></td>
+        <td>
+            <a th:href="@{'/subproject/details/' + ${subProject.subProjectName}}">Se detaljer</a> |
+            <a th:href="@{'/subproject/deleteSubProject/' + ${subProject.subProjectName}}">Slet</a> |
+            <a th:href="@{'/editSubProject/' + ${subProject.subProjectName}}">Rediger</a>
+
+
+
+
+        </td>
     </tr>
 </table>
 
 <a th:href="@{/createSubProject}">
-    <button type="button">Create New Subproject</button>
+    <button type="button">Opret nyt underprojekt</button>
 </a>
 
 </body>
