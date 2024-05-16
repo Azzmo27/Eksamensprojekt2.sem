@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rediger Task</title>
+</head>
+<body>
+<h2>Rediger Task</h2>
+<form action="/editTask" method="post" th:object="${editTask}">
+
+  <input type="hidden" name="taskName" th:value="${editTask.taskName}" />
+
+  <p>
+    <label for="editTaskName">Navn:</label>
+    <input id="editTaskName" type="text" name="taskName" th:value="${editTask.taskName}">
+  </p>
+
+  <p>
+    <label for="editTaskDescription">Beskrivelse:</label>
+    <input id="editTaskDescription" type="text" name="taskDescription" th:value="${editTask.taskDescription}">
+  </p>
+  <p>
+    <label for="editTaskStartDate">Startdato:</label>
+    <input id="editTaskStartDate" type="date" name="taskStartDate" th:value="${editTask.taskStartDate}">
+  </p>
+  <p>
+    <label for="editTaskEndDate">Slutdato:</label>
+    <input id="editTaskEndDate" type="date" name="taskEndDate" th:value="${editTask.taskEndDate}">
+  </p>
+  <p>
+    <label for="editTimeEstimate">Tidsestimat (timer):</label>
+    <input id="editTimeEstimate" type="number" name="timeEstimate" th:value="${editTask.timeEstimate}">
+  </p>
+  <button type="submit">Opdater Task</button>
+</form>
+
+<a th:href="@{'/tasks/show'}">
+  <button type="button">Tilbage til Task</button>
+</a>
+</body>
+</html>
