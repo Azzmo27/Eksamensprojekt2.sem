@@ -23,19 +23,18 @@
         <th>End Date</th>
         <th>Status</th>
     </tr>
-    <tr th:each="subproject : ${subprojects}">
-        <td th:text="${subproject.subProjectName}"></td>
-        <td th:text="${subproject.subprojectDescription}"></td>
-        <td th:text="${#temporals.format(subproject.subProjectStartDate, 'yyyy-MM-dd')}"></td>
-        <td th:text="${#temporals.format(subproject.subProjectEndDate, 'yyyy-MM-dd')}"></td>
-        <td th:text="${subproject.subProjectStatus}"></td>
+    <tr th:each="subProject : ${subprojects}">
+        <td th:text="${subProject.subProjectName}"></td>
+        <td th:text="${subProject.subProjectDescription}"></td>
+        <td th:text="${#temporals.format(subProject.subProjectStartDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(subProject.subProjectEndDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${subProject.subProjectStatus}"></td>
     </tr>
 </table>
 
-<a
-
-   th:href="@{'/chosenProject/' + ${chosenProject.projectName} + '/createSubproject'}">
+<a th:href="@{/createSubProject}">
     <button type="button">Create New Subproject</button>
 </a>
+
 </body>
 </html>

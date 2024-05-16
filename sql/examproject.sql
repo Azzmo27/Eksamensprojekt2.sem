@@ -1,5 +1,5 @@
+DROP DATABASE IF EXISTS ExampPoject_DB;
 CREATE DATABASE IF NOT EXISTS ExamProject_DB;
-CREATE SCHEMA IF NOT EXISTS ExamProject_DB;
 USE ExamProject_DB;
 
 CREATE TABLE IF NOT EXISTS project (
@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS project (
 );
 
 CREATE TABLE IF NOT EXISTS subProject (
-    subProject_id INT AUTO_INCREMENT PRIMARY KEY,
     subProjectName VARCHAR(255),
     subProjectDescription VARCHAR(255),
     subProjectStartDate Date,

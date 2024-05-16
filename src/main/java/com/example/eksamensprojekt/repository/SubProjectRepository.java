@@ -5,10 +5,7 @@ import com.example.eksamensprojekt.repository.ConnectionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +21,21 @@ public class SubProjectRepository {
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
             stmt.setString(1, subProject.getSubProjectName());
-            stmt.setString(2, subProject.getSubprojectDescription());
-            stmt.setDate(3, java.sql.Date.valueOf(subProject.getSubProjectStartDate()));
-            stmt.setDate(4, java.sql.Date.valueOf(subProject.getSubProjectEndDate()));
+            stmt.setString(2, subProject.getSubProjectDescription());
+
+
+            if (subProject.getSubProjectStartDate() != null) {
+                stmt.setDate(3, java.sql.Date.valueOf(subProject.getSubProjectStartDate()));
+            } else {
+                stmt.setNull(3, Types.DATE);
+            }
+
+            if (subProject.getSubProjectEndDate() != null) {
+                stmt.setDate(4, java.sql.Date.valueOf(subProject.getSubProjectEndDate()));
+            } else {
+                stmt.setNull(4, Types.DATE);
+            }
+
             stmt.setString(5, subProject.getSubProjectStatus());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -66,27 +75,37 @@ public class SubProjectRepository {
     }
 
     public List<Subproject> findAllSubProject() {
-        List<Subproject> subprojects = new ArrayList<>();
-        String sql = "SELECT subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus FROM subProject";
+        String sql = "SELECT * FROM subProject";
+        List<Subproject> subProjects = new ArrayList<>();
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs = stmt.executeQuery()
         ) {
             while (rs.next()) {
-                Subproject subproject = new Subproject();
-                subproject.setSubProjectName(rs.getString("subProjectName"));
-                subproject.setSubProjectDescription(rs.getString("subProjectDescription"));
-                subproject.setSubProjectStartDate(rs.getDate("subProjectStartDate").toLocalDate());
-                subproject.setSubProjectEndDate(rs.getDate("subProjectEndDate").toLocalDate());
-                subproject.setSubProjectStatus(rs.getString("subProjectStatus"));
-                subprojects.add(subproject);
+                Subproject subProject = new Subproject();
+                subProject.setSubProjectName(rs.getString("subProjectName"));
+                subProject.setSubProjectDescription(rs.getString("subProjectDescription"));
+
+                Date startDate = rs.getDate("subProjectStartDate");
+                if (startDate != null) {
+                    subProject.setSubProjectStartDate(startDate.toLocalDate());
+                }
+                Date endDate = rs.getDate("subProjectEndDate");
+                if (endDate != null) {
+                    subProject.setSubProjectEndDate(endDate.toLocalDate());
+                }
+
+                subProject.setSubProjectStatus(rs.getString("subProjectStatus"));
+
+                subProjects.add(subProject);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return subprojects;
+        return subProjects;
     }
+
 
     public Subproject findSubProjectByName(String name) {
         String sql = "SELECT subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus FROM subProject WHERE subProjectName = ?";

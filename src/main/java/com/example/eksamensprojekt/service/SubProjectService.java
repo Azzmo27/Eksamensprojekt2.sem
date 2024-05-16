@@ -24,7 +24,6 @@ public class SubProjectService {
         subProjectRepository.createSubProject(subProject);
 
     }
-
     public void editSubProject(String name, Subproject editedSubProject) {
         subProjectRepository.editSubProject(name, editedSubProject);
     }
@@ -37,7 +36,6 @@ public class SubProjectService {
         return subProjectRepository.findAllSubProject();
 
     }
-
     public Subproject findSubProjectByName(String subProjectName) {
         return subProjectRepository.findSubProjectByName(subProjectName);
     }

@@ -2,23 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Edit Project</title>
+    <title>Edit Project</title>
 </head>
 <body>
 <h2>Edit Project</h2>
 <form action="/editProject" method="post" th:object="${editProject}">
-    <input type="hidden" name="projectName" th:value="${editProject.projectName}" />
+    <input type="hidden" name="projectName" th:if="${editProject != null}" th:value="${editProject.projectName}" />
     <p>
         <label for="editDescription">Description:</label>
-        <input id="editDescription" type="text" name="description" th:value="${editProject.description}">
+        <input id="editDescription" type="text" name="description" th:if="${editProject != null}" th:value="${editProject.description}">
     </p>
     <p>
         <label for="editStartDate">Start Date:</label>
-        <input id="editStartDate" type="date" name="startDate" th:value="${editProject.startDate}">
+        <input id="editStartDate" type="date" name="startDate" th:if="${editProject != null}" th:value="${editProject.startDate}">
     </p>
     <p>
         <label for="editEndDate">End Date:</label>
-        <input id="editEndDate" type="date" name="endDate" th:value="${editProject.endDate}">
+        <input id="editEndDate" type="date" name="endDate" th:if="${editProject != null}" th:value="${editProject.endDate}">
     </p>
     <button type="submit">Update Project</button>
 </form>

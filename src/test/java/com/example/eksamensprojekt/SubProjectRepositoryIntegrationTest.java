@@ -5,7 +5,8 @@ import com.example.eksamensprojekt.repository.SubProjectRepository;
 import com.example.eksamensprojekt.service.SubProjectService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -27,9 +28,8 @@ public class SubProjectRepositoryIntegrationTest {
 
     @Test
     public void testCreateSubProject() {
-        // Arrange
-        Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active");
 
+        Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active");
 
         subProjectRepository.createSubProject(subproject);
 

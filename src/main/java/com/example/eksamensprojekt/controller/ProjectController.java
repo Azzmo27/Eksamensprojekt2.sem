@@ -77,12 +77,20 @@ public class ProjectController implements ErrorController {
         projectService.editProject(editProject.getProjectName(), editProject);
         return "redirect:/showProject";
     }
-
-    @PostMapping("/createSubProject")
+    @PostMapping("/createdSubProject")
     public String createSubProject(@ModelAttribute("subProject") Subproject subProject) {
         subProjectService.createSubProject(subProject);
-        return "redirect:/createSubProject";
+        // Redirecting back to chosenProject page
+        return "redirect:/chosenProject/" + subProject.getSubProjectName();
     }
+
+    @PostMapping("/chosenProject/{projectName}/createSubproject")
+    public String createSubProject(@PathVariable("projectName") String projectName, Model model) {
+        Project chosenProject = projectService.findProjectByName(projectName);
+        model.addAttribute("chosenProject", chosenProject);
+        return "chosenProject"; // Return to chosenProject page
+    }
+
 
     @PostMapping("/deleteSubProject/{subProjectName}")
     public String deleteSubProject(@PathVariable String subProjectName) {

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class ProjectRepository {
 
     public List<Project> findAllProject() {
         List<Project> projects = new ArrayList<>();
-        String sql = "SELECT project_id, projectName, description, startDate, endDate FROM project";
+        String sql = "SELECT projectId, projectName, description, startDate, endDate FROM project";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
@@ -116,7 +115,7 @@ public class ProjectRepository {
     }
 
     public Project findProjectByName(String name) {
-        String sql = "SELECT project_id, projectName, description, startDate, endDate FROM project WHERE projectName = ?";
+        String sql = "SELECT projectId, projectName, description, startDate, endDate FROM project WHERE projectName = ?";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
@@ -125,7 +124,7 @@ public class ProjectRepository {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Project project = new Project();
-                    project.setProjectId(rs.getInt("project_id"));
+                    project.setProjectId(rs.getInt("projectId"));
                     project.setProjectName(rs.getString("projectName"));
                     project.setDescription(rs.getString("description"));
 

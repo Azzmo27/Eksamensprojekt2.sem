@@ -2,28 +2,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
     <title>Create Subproject</title>
+    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
 </head>
 <body>
 <h2>Create Subproject</h2>
-    <label for="subProjectName">Subproject Name:</label><br>
-    <input type="text" id="subProjectName" name="subProjectName"><br>
+<div class="container">
+    <form action="/createdSubProject" method="post" th:object="${subProject}">
 
-    <label for="subProjectDescription">Description:</label><br>
-    <textarea id="subProjectDescription" name="subProjectDescription" rows="4" cols="50"></textarea><br>
+        <p>
+            <label for="subProjectName">Name of Subproject</label><br>
+            <input class="input-field" id="subProjectName" name="subProjectName" th:field="*{subProjectName}" placeholder="Subproject name"><br>
+        </p>
+        <p>
+            <label for="subProjectDescription">Description</label><br>
+            <textarea class="input-field" id="subProjectDescription" name="subProjectDescription" th:field="*{subProjectDescription}" rows="4" cols="50" placeholder="Description"></textarea><br>
+        </p>
+        <p>
+            <label for="startDate">Start Date</label><br>
+            <input class="input-field" id="startDate" name="startDate" type="date" th:field="*{subProjectStartDate}" placeholder="Start date"><br>
+        </p>
+        <p>
+            <label for="endDate">End Date</label><br>
+            <input class="input-field" id="endDate" name="endDate" type="date" th:field="*{subProjectEndDate}" placeholder="End date"><br>
+        </p>
 
-    <label for="subProjectStartDate">Start Date:</label><br>
-    <input type="date" id="subProjectStartDate" name="subProjectStartDate"><br>
+        <p>
+            <label for="subProjectStatus">Status</label><br>
+            <input class="input-field" id="subProjectStatus" name="subProjectStatus" th:field="*{subProjectStatus}" placeholder="Status"><br>
+        </p>
 
-    <label for="subProjectEndDate">End Date:</label><br>
-    <input type="date" id="subProjectEndDate" name="subProjectEndDate"><br>
+        <p>
+            <button class="submit-button" type="submit">Create Subproject</button>
+        </p>
 
-    <label for="subProjectStatus">Status:</label><br>
-    <input type="text" id="subProjectStatus" name="subProjectStatus"><br>
+    </form>
+</div>
 
-    <input type="submit" value="Create Subproject">
-</form>
+<a th:href="@{'/chosenProject'}">
+    <button type="button">Back to Chosen Project</button>
+</a>
+
 </body>
 </html>
