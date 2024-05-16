@@ -26,10 +26,10 @@
         <td th:text="${project.description}"></td>
         <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
-        <td>
-            <form th:action="@{'/' + ${project.projectName} + '/delete'}" method="post">
+        <td><
+            <form th:action="@{'/' + ${project.projectName} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette projektet?');">
                 <input type="hidden" name="_method" value="delete" />
-                <button type="submit">Delete</button>
+                <button type="submit">Slet</button>
             </form>
         </td>
         <td><a th:href="@{'/' + ${project.projectName} + '/editProject'}">Edit</a></td>
