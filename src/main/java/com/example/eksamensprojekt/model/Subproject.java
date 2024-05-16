@@ -28,7 +28,7 @@ public class Subproject {
     public String getSubProjectName() {
         return subProjectName;
     }
-    public String getSubprojectDescription() {
+    public String getSubProjectDescription() {
         return subProjectDescription;
     }
 

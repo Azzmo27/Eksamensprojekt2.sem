@@ -49,7 +49,7 @@ public class SubProjectRepositoryIntegrationTest {
         // Assert
         Subproject editedSubproject = subProjectRepository.findSubProjectByName("TestSubProject");
         assertNotNull(editedSubproject);
-        assertEquals(subproject.getSubprojectDescription(), editedSubproject.getSubprojectDescription());
+        assertEquals(subproject.getSubProjectDescription(), editedSubproject.getSubProjectDescription());
     }
 
     @Test

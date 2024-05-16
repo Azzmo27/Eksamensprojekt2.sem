@@ -50,7 +50,7 @@ public class SubProjectRepository {
                 PreparedStatement stmt = conn.prepareStatement(editSql)
         ) {
             stmt.setString(1, editedSubProject.getSubProjectName());
-            stmt.setString(2, editedSubProject.getSubprojectDescription());
+            stmt.setString(2, editedSubProject.getSubProjectDescription());
             stmt.setDate(3, java.sql.Date.valueOf(editedSubProject.getSubProjectStartDate()));
             stmt.setDate(4, java.sql.Date.valueOf(editedSubProject.getSubProjectEndDate()));
             stmt.setString(5, editedSubProject.getSubProjectStatus());

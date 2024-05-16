@@ -94,7 +94,7 @@ public class ProjectRepository {
         ) {
             while (rs.next()) {
                 Project project = new Project();
-                project.setProjectId(rs.getInt("project_id"));
+                project.setProjectId(rs.getInt("projectId"));
                 project.setProjectName(rs.getString("projectName"));
                 project.setDescription(rs.getString("description"));
 
