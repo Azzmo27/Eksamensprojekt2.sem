@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Subproject</title>
+</head>
+<body>
+<h2>Edit Subproject</h2>
+<h3>Subproject Details</h3>
+<p th:if="${editSubProject != null}">Subproject Name: <span th:text="${editSubProject.subProjectName}"></span></p>
+<p th:if="${editSubProject != null}">Description: <span th:text="${editSubProject.subProjectDescription}"></span></p>
+<p th:if="${editSubProject != null}">Start Date: <span th:text="${#temporals.format(editSubProject.subProjectStartDate, 'yyyy-MM-dd')}"></span></p>
+<p th:if="${editSubProject != null}">End Date: <span th:text="${#temporals.format(editSubProject.subProjectEndDate, 'yyyy-MM-dd')}"></span></p>
+
+<form th:action="@{/subproject/editSubProject/{subProjectName}(subProjectName=${editSubProject.subProjectName})}" th:object="${editSubProject}" method="post">
+    <input type="hidden" name="subProjectName" th:value="${editSubProject.subProjectName}" />
+    <input type="hidden" name="projectName" th:value="${editSubProject.projectName}" />
+    <label for="subProjectDescription">Description:</label><br>
+    <textarea id="subProjectDescription" name="subProjectDescription" th:text="${editSubProject.subProjectDescription}"></textarea><br>
+    <label for="subProjectStartDate">Start Date:</label><br>
+    <input type="date" id="subProjectStartDate" name="subProjectStartDate" th:value="${#temporals.format(editSubProject.subProjectStartDate, 'yyyy-MM-dd')}" /><br>
+    <label for="subProjectEndDate">End Date:</label><br>
+    <input type="date" id="subProjectEndDate" name="subProjectEndDate" th:value="${#temporals.format(editSubProject.subProjectEndDate, 'yyyy-MM-dd')}" /><br>
+    <button type="submit">Update</button>
+</form>
+
+<a th:href="@{'/chosenProject/' + ${editSubProject.subProjectName}}">
+    <button type="button">Return to Chosen Project</button>
+</a>
+</body>
+</html>
