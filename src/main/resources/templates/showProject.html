@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
-    <title>Show Projects</title>
+    <title>Vis Projekter</title>
 </head>
 <body>
-<h2>List of Projects</h2>
+<h2>Liste over Projekter</h2>
 
 <table border="1">
     <tr>
-        <th>Project ID</th>
-        <th>Project Name</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Delete project</th>
-        <th>Edit project</th>
-        <th>Choose project</th>
+        <th>Projekt ID</th>
+        <th>Projektnavn</th>
+        <th>Beskrivelse</th>
+        <th>Startdato</th>
+        <th>Slutdato</th>
+        <th>Slet projekt</th>
+        <th>Rediger projekt</th>
+        <th>Vælg projekt</th>
     </tr>
     <tr th:each="project : ${projects}">
         <td th:text="${project.projectId}"></td>
@@ -26,15 +26,14 @@
         <td th:text="${project.description}"></td>
         <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
-        <td><
+        <td>
             <form th:action="@{'/' + ${project.projectName} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette projektet?');">
                 <input type="hidden" name="_method" value="delete" />
                 <button type="submit">Slet</button>
             </form>
         </td>
-        <td><a th:href="@{'/' + ${project.projectName} + '/editProject'}">Edit</a></td>
-        <td><a th:href="@{'/chosenProject/' + ${project.projectName}}">Choose Project</a></td>
-
+        <td><a th:href="@{'/' + ${project.projectName} + '/editProject'}">Rediger</a></td>
+        <td><a th:href="@{'/chosenProject/' + ${project.projectName}}">Vælg Projekt</a></td>
     </tr>
 </table>
 

@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Project</title>
+    <title>Rediger Projekt</title>
 </head>
 <body>
-<h2>Edit Project</h2>
+<h2>Rediger Projekt</h2>
 <form action="/editProject" method="post" th:object="${editProject}">
     <input type="hidden" name="projectName" th:if="${editProject != null}" th:value="${editProject.projectName}" />
     <p>
-        <label for="editDescription">Description:</label>
+        <label for="editDescription">Beskrivelse:</label>
         <input id="editDescription" type="text" name="description" th:if="${editProject != null}" th:value="${editProject.description}">
     </p>
     <p>
-        <label for="editStartDate">Start Date:</label>
+        <label for="editStartDate">Start Dato:</label>
         <input id="editStartDate" type="date" name="startDate" th:if="${editProject != null}" th:value="${editProject.startDate}">
     </p>
     <p>
-        <label for="editEndDate">End Date:</label>
+        <label for="editEndDate">Slut Dato:</label>
         <input id="editEndDate" type="date" name="endDate" th:if="${editProject != null}" th:value="${editProject.endDate}">
     </p>
-    <button type="submit">Update Project</button>
+    <button type="submit">Opdater Projekt</button>
 </form>
 
 <a th:href="@{'/showProject'}">
-    <button type="button">Return to Projects</button>
+    <button type="button">Tilbage til Projekter</button>
 </a>
 </body>
 </html>
