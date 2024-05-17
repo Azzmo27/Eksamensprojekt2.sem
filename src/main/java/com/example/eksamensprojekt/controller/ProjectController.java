@@ -118,6 +118,7 @@ public class ProjectController implements ErrorController {
         model.addAttribute("editSubProject", subProject);
         model.addAttribute("projectName", projectName);
         return "editSubProject";
+
     }
 
     @PostMapping("/editSubProject/{subProjectId}")
