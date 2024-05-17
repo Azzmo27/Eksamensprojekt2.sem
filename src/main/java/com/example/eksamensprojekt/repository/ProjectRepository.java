@@ -25,13 +25,13 @@ public class ProjectRepository {
             if (project.getStartDate() != null) {
                 stmt.setDate(3, java.sql.Date.valueOf(project.getStartDate()));
             } else {
-                stmt.setNull(3, Types.DATE);// Set as NULL in database if startDate is null
+                stmt.setNull(3, Types.DATE);
             }
 
             if (project.getEndDate() != null) {
                 stmt.setDate(4, java.sql.Date.valueOf(project.getEndDate()));
             } else {
-                stmt.setNull(4, Types.DATE);// Set as NULL in database if endDate is null
+                stmt.setNull(4, Types.DATE);
             }
 
             stmt.executeUpdate();

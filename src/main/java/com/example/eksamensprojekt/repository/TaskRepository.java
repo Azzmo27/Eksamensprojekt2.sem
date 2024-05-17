@@ -61,7 +61,7 @@ public class TaskRepository {
                 stmt.setNull(3, Types.DATE);
             }
 
-            // Null check for taskEndDate
+
             if (editTask.getTaskEndDate() != null) {
                 stmt.setDate(4, java.sql.Date.valueOf(editTask.getTaskEndDate()));
             } else {
