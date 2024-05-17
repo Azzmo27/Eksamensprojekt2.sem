@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
-    <title>Create Project</title>
+    <title>Opret Projekt</title>
 </head>
 <body>
-<h2>Create Project</h2>
+<h2>Opret Projekt</h2>
 <form action="/create" method="post">
-    <label for="projectName">Project Name:</label><br>
+    <label for="projectName">Projektnavn:</label><br>
     <input type="text" id="projectName" name="projectName"><br>
 
-    <label for="description">Description:</label><br>
+    <label for="description">Beskrivelse:</label><br>
     <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
 
-    <label for="startDate">Start Date:</label><br>
+    <label for="startDate">Startdato:</label><br>
     <input type="date" id="startDate" name="startDate"><br>
 
-    <label for="endDate">End Date:</label><br>
+    <label for="endDate">Slutdato:</label><br>
     <input type="date" id="endDate" name="endDate"><br>
 
-    <input type="submit" value="Create Project">
+    <input type="submit" value="Opret Projekt">
 
 </form>
 </body>

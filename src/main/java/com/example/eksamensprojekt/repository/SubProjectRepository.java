@@ -14,66 +14,67 @@ public class SubProjectRepository {
     @Autowired
     private ConnectionManager connectionManager;
 
-    public void createSubProject(Subproject subProject) {
-        String sql = "INSERT INTO subProject (subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus) VALUES (?, ?, ?, ?, ?)";
+    public void createSubProject(Subproject subProject, int projectId) {
+        String sql = "INSERT INTO subProject (subProjectId, projectId, subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
-            stmt.setString(1, subProject.getSubProjectName());
-            stmt.setString(2, subProject.getSubProjectDescription());
-
+            stmt.setInt(1, projectId);
+            stmt.setString(2, subProject.getSubProjectName());
+            stmt.setString(3, subProject.getSubProjectDescription());
 
             if (subProject.getSubProjectStartDate() != null) {
-                stmt.setDate(3, java.sql.Date.valueOf(subProject.getSubProjectStartDate()));
-            } else {
-                stmt.setNull(3, Types.DATE);
-            }
-
-            if (subProject.getSubProjectEndDate() != null) {
-                stmt.setDate(4, java.sql.Date.valueOf(subProject.getSubProjectEndDate()));
+                stmt.setDate(4, java.sql.Date.valueOf(subProject.getSubProjectStartDate()));
             } else {
                 stmt.setNull(4, Types.DATE);
             }
 
-            stmt.setString(5, subProject.getSubProjectStatus());
+            if (subProject.getSubProjectEndDate() != null) {
+                stmt.setDate(5, java.sql.Date.valueOf(subProject.getSubProjectEndDate()));
+            } else {
+                stmt.setNull(5, Types.DATE);
+            }
+
+            stmt.setString(6, subProject.getSubProjectStatus());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void editSubProject(String name, Subproject editedSubProject) {
-        String editSql = "UPDATE subProject SET subProjectName = ?, subProjectDescription = ?, subProjectStartDate = ?, subProjectEndDate = ?, subProjectStatus = ? WHERE subProjectName = ?";
+    public void editSubProject(int subProjectId, Subproject editedSubProject) {
+        String editSql = "UPDATE subProject SET projectId = ?, subProjectName = ?, subProjectDescription = ?, subProjectStartDate = ?, subProjectEndDate = ?, subProjectStatus = ? WHERE subProjectId = ?";
+
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(editSql)
         ) {
-            stmt.setString(1, editedSubProject.getSubProjectName());
-            stmt.setString(2, editedSubProject.getSubProjectDescription());
-            stmt.setDate(3, java.sql.Date.valueOf(editedSubProject.getSubProjectStartDate()));
-            stmt.setDate(4, java.sql.Date.valueOf(editedSubProject.getSubProjectEndDate()));
-            stmt.setString(5, editedSubProject.getSubProjectStatus());
-            stmt.setString(6, name);
+            stmt.setInt(1, editedSubProject.getProjectId());
+            stmt.setString(2, editedSubProject.getSubProjectName());
+            stmt.setString(3, editedSubProject.getSubProjectDescription());
+            stmt.setDate(4, java.sql.Date.valueOf(editedSubProject.getSubProjectStartDate()));
+            stmt.setDate(5, java.sql.Date.valueOf(editedSubProject.getSubProjectEndDate()));
+            stmt.setString(6, editedSubProject.getSubProjectStatus());
+            stmt.setInt(7, subProjectId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteSubProject(String SubprojectName) {
-        String deleteSql = "DELETE FROM subProject WHERE subProjectName = ?";
+    public void deleteSubProject(int subProjectId) {
+        String deleteSql = "DELETE FROM subProject WHERE subProjectId = ?";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(deleteSql)
         ) {
-            stmt.setString(1, SubprojectName);
+            stmt.setInt(1, subProjectId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
     public List<Subproject> findAllSubProject() {
         String sql = "SELECT * FROM subProject";
         List<Subproject> subProjects = new ArrayList<>();
@@ -107,13 +108,13 @@ public class SubProjectRepository {
     }
 
 
-    public Subproject findSubProjectByName(String name) {
-        String sql = "SELECT subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus FROM subProject WHERE subProjectName = ?";
+    public Subproject findSubProjectById(int subProjectId) {
+        String sql = "SELECT subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus FROM subProject WHERE subProjectId = ?";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
-            stmt.setString(1, name);
+            stmt.setInt(1, subProjectId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     Subproject subproject = new Subproject();
@@ -122,6 +123,7 @@ public class SubProjectRepository {
                     subproject.setSubProjectStartDate(rs.getDate("subProjectStartDate").toLocalDate());
                     subproject.setSubProjectEndDate(rs.getDate("subProjectEndDate").toLocalDate());
                     subproject.setSubProjectStatus(rs.getString("subProjectStatus"));
+                    subproject.setSubProjectId(subProjectId); // Set the correct ID for the subproject
                     return subproject;
                 }
             }
@@ -130,4 +132,23 @@ public class SubProjectRepository {
         }
         return null;
     }
+
+
+
+    public String findProjectNameBySubProjectId(int subProjectId) {
+        // Find subprojektet baseret på subprojektets ID
+        Subproject subproject = findSubProjectById(subProjectId);
+
+        // Hvis subprojektet ikke eksisterer, returner null
+        if (subproject == null) {
+            return null;
+        }
+
+        // Hent projektets navn fra databasen baseret på subprojektets ID
+        // Dette er kun et fiktivt eksempel og afhænger af din databasestruktur
+        String projectName = subproject.getSubProjectName();
+
+        return projectName;
+    }
+
 }

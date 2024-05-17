@@ -17,6 +17,7 @@
 <h3>Underprojekter</h3>
 <table border="1">
     <tr>
+        <th>Underprojekt ID</th>
         <th>Underprojektnavn</th>
         <th>Beskrivelse</th>
         <th>Startdato</th>
@@ -25,23 +26,18 @@
         <th>Handlinger</th>
     </tr>
     <tr th:each="subProject : ${subprojects}">
+        <td th:text="${subProject.subProjectId}"></td>
         <td th:text="${subProject.subProjectName}"></td>
         <td th:text="${subProject.subProjectDescription}"></td>
         <td th:text="${#temporals.format(subProject.subProjectStartDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(subProject.subProjectEndDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${subProject.subProjectStatus}"></td>
         <td>
-            <a th:href="@{'/subproject/details/' + ${subProject.subProjectName}}">Se detaljer</a> |
-
-            <form th:action="@{'/subproject/deleteSubProject/' + ${subProject.subProjectName}}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette underprojektet?');">
-                <input type="hidden" name="_method" value="delete" />
+            <a th:href="@{'/subproject/details/' + ${subProject.subProjectId}}">Se detaljer</a> |
+            <form th:action="@{'/deleteSubProject/' + ${subProject.subProjectId}}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette underprojektet?');">
                 <button type="submit">Slet</button>
             </form> |
-            <a th:href="@{'/editSubProject/' + ${subProject.subProjectName}}">Rediger</a>
-
-
-
-
+            <a th:href="@{'/editSubProject/' + ${subProject.subProjectId}}">Rediger underprojekt</a>
         </td>
     </tr>
 </table>
@@ -50,5 +46,22 @@
     <button type="button">Opret nyt underprojekt</button>
 </a>
 
+<h3>Underprojekt opgaver</h3>
+<table border="1">
+    <tr>
+        <th>Opgavenavn</th>
+        <th>Beskrivelse</th>
+        <th>Startdato</th>
+        <th>Slutdato</th>
+        <th>Tidsmængde</th>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td th:text="${task.taskName}"></td>
+        <td th:text="${task.taskDescription}"></td>
+        <td th:text="${#temporals.format(task.taskStartDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(task.taskEndDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${task.timeEstimate}"></td>
+    </tr>
+</table>
 </body>
 </html>

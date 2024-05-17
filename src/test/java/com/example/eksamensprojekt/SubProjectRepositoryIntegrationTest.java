@@ -15,25 +15,26 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import java.time.LocalDate;
 import java.util.List;
-
 @SpringBootTest
-
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class SubProjectRepositoryIntegrationTest {
 
     @Autowired
     private SubProjectService subProjectService;
 
-    @MockBean
+    @Autowired
     private SubProjectRepository subProjectRepository;
 
     @Test
     public void testCreateSubProject() {
+        // Arrange
+        Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 2);
 
-        Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active");
+        // Act
+        subProjectService.createSubProject(subproject, subproject.getProjectId());
 
-        subProjectRepository.createSubProject(subproject);
-
-        Subproject createdSubproject = subProjectRepository.findSubProjectByName("TestSubProject");
+        // Assert
+        Subproject createdSubproject = subProjectRepository.findSubProjectById(subproject.getSubProjectId());
         assertNotNull(createdSubproject);
         assertEquals(subproject.getSubProjectName(), createdSubproject.getSubProjectName());
     }
@@ -41,13 +42,15 @@ public class SubProjectRepositoryIntegrationTest {
     @Test
     public void testEditSubProject() {
         // Arrange
-        Subproject subproject = new Subproject("TestSubProject", "Updated Description", LocalDate.now(), LocalDate.now(), "Active");
+        Subproject subproject = new Subproject("TestSubProject", "Updated Description", LocalDate.now(), LocalDate.now(), "Active", 2);
+        subProjectService.createSubProject(subproject, subproject.getProjectId());
 
         // Act
-        subProjectRepository.editSubProject("TestSubProject", subproject);
+        subproject.setSubProjectDescription("Updated Description");
+        subProjectService.editSubProject(subproject.getSubProjectId(), subproject);
 
         // Assert
-        Subproject editedSubproject = subProjectRepository.findSubProjectByName("TestSubProject");
+        Subproject editedSubproject = subProjectRepository.findSubProjectById(subproject.getSubProjectId());
         assertNotNull(editedSubproject);
         assertEquals(subproject.getSubProjectDescription(), editedSubproject.getSubProjectDescription());
     }
@@ -55,21 +58,24 @@ public class SubProjectRepositoryIntegrationTest {
     @Test
     public void testDeleteSubProject() {
         // Arrange
-        subProjectRepository.createSubProject(new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active"));
+        Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 2);
+        subProjectService.createSubProject(subproject, subproject.getProjectId());
 
         // Act
-        subProjectRepository.deleteSubProject("TestSubProject");
+        subProjectService.deleteSubProject(subproject.getSubProjectId());
 
         // Assert
-        Subproject deletedSubproject = subProjectRepository.findSubProjectByName("TestSubProject");
+        Subproject deletedSubproject = subProjectRepository.findSubProjectById(subproject.getSubProjectId());
         assertNull(deletedSubproject);
     }
+
 
     @Test
     public void testFindAllSubProject() {
         // Arrange
-        subProjectRepository.createSubProject(new Subproject("TestSubProject1", "Test Description", LocalDate.now(), LocalDate.now(), "Active"));
-        subProjectRepository.createSubProject(new Subproject("TestSubProject2", "Test Description", LocalDate.now(), LocalDate.now(), "Active"));
+        subProjectService.createSubProject(new Subproject("TestSubProject1", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 1)); // Tilføjet projectId "1"
+        subProjectService.createSubProject(new Subproject("TestSubProject2", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 2)); // Tilføjet projectId "2"
+
 
         // Act
         List<Subproject> subprojects = subProjectRepository.findAllSubProject();
@@ -78,4 +84,6 @@ public class SubProjectRepositoryIntegrationTest {
         assertNotNull(subprojects);
         assertEquals(2, subprojects.size());
     }
+
+
 }

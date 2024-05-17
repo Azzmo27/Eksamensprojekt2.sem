@@ -142,4 +142,31 @@ public class TaskRepository {
         }
         return null;
     }
+
+    public List<Task> findTasksBySubProjectId(int subProjectId) {
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT taskName, taskDescription, taskStartDate, taskEndDate, timeEstimate FROM task WHERE subProjectId = ?";
+        try (
+                Connection conn = connectionManager.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, subProjectId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Task task = new Task();
+                    task.setTaskName(rs.getString("taskName"));
+                    task.setTaskDescription(rs.getString("taskDescription"));
+                    task.setTaskStartDate(rs.getDate("taskStartDate").toLocalDate());
+                    task.setTaskEndDate(rs.getDate("taskEndDate").toLocalDate());
+                    task.setTimeEstimate(rs.getInt("timeEstimate"));
+
+                    tasks.add(task);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tasks;
+    }
+
 }

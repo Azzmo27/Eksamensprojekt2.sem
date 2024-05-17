@@ -2,14 +2,13 @@ package com.example.eksamensprojekt.repository;
 
 import com.example.eksamensprojekt.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-
-
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import com.example.eksamensprojekt.repository.ConnectionManager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 
 @Repository
 public class UserRepository {
@@ -17,10 +16,12 @@ public class UserRepository {
     @Autowired
     private ConnectionManager connectionManager;
 
-    public void createUser(User user) throws SQLException {
-        String sql = "INSERT INTO user (username, user_password, first_name, last_name, email, role,userId) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+    public void createUser(User user) {
+        String sql = "INSERT INTO user (username, user_password, first_name, last_name, email, role, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (
+                Connection connection = connectionManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getUserPassword());
             preparedStatement.setString(3, user.getFirstName());
@@ -29,31 +30,34 @@ public class UserRepository {
             preparedStatement.setString(6, user.getRole());
             preparedStatement.setInt(7, user.getUserId());
             preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public boolean verifyUserLogin(String username, String userPassword) throws SQLException {
+    public boolean verifyUserLogin(String username, String userPassword) {
         String sql = "SELECT username, user_password FROM user WHERE username = ? AND user_password = ?";
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (
+                Connection connection = connectionManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, userPassword);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Returnerer true, hvis der er mindst én række i resultatet
+                return resultSet.next(); // Return true if there is at least one row in the result
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Håndter fejl i forbindelse med databaseadgangen
+            e.printStackTrace();
             return false;
         }
     }
 
-
-
-
-    public int getUserId(String username, String userPassword) throws SQLException {
+    public int getUserId(String username, String userPassword) {
         String sql = "SELECT user_id FROM user WHERE username = ? AND user_password = ?";
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (
+                Connection connection = connectionManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, userPassword);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -63,16 +67,18 @@ public class UserRepository {
                     return -1;
                 }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 
-
-
     public void save(User user) {
-        String sql = "INSERT INTO users (first_name, last_name, username, password, role, userId) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = connectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-
+        String sql = "INSERT INTO users (first_name, last_name, username, user_password, email, role, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (
+                Connection connection = connectionManager.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)
+        ) {
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getUsername());
@@ -80,15 +86,9 @@ public class UserRepository {
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setString(6, user.getRole());
             preparedStatement.setInt(7, user.getUserId());
-
-
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
     }
 }
-
-
-
