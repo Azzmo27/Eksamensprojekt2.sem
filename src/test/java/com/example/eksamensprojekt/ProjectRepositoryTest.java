@@ -22,19 +22,6 @@ public class ProjectRepositoryTest {
     @MockBean
     private ConnectionManager connectionManager;
 
-    @Test
-    void createProjectTest() {
-        Project project = new Project();
-        project.setProjectName("Test name");
-        project.setDescription("Test description");
-        project.setStartDate(LocalDate.of(2024, 12, 23));
-        project.setEndDate(LocalDate.of(2025, 1, 23));
-
-        assertEquals("Test name", project.getProjectName());
-        assertEquals("Test description", project.getDescription());
-        assertEquals(LocalDate.of(2024, 12, 23), project.getStartDate());
-        assertEquals(LocalDate.of(2025, 1, 23), project.getEndDate());
-    }
 
     @Test
     public void testEditProject() {

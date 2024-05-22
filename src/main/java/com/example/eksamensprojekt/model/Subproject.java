@@ -12,7 +12,6 @@ public class Subproject {
     private String subProjectStatus;
     private int projectId;
 
-    // Konstruktør med alle felter
     public Subproject(String subProjectName, String subProjectDescription, LocalDate subProjectStartDate, LocalDate subProjectEndDate, String subProjectStatus, int projectId) {
         this.subProjectName = subProjectName;
         this.subProjectDescription = subProjectDescription;
@@ -78,5 +77,17 @@ public class Subproject {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+    @Override
+    public String toString() {
+        return "Subproject{" +
+                "subProjectId=" + subProjectId +
+                ", projectId=" + projectId +
+                ", subProjectName='" + subProjectName + '\'' +
+                ", subProjectDescription='" + subProjectDescription + '\'' +
+                ", subProjectStartDate=" + subProjectStartDate +
+                ", subProjectEndDate=" + subProjectEndDate +
+                ", subProjectStatus='" + subProjectStatus + '\'' +
+                '}';
     }
 }

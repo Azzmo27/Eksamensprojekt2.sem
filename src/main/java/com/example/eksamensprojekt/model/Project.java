@@ -6,14 +6,14 @@ public class Project {
 
     private int projectId;
     private String projectName;
-    private String description;
+    private String projectDescription;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Project (int projectId, String ProjectName, String description, LocalDate startDate, LocalDate endDate){
+    public Project (int projectId, String ProjectName, String projectDescription, LocalDate startDate, LocalDate endDate){
         this.projectId = projectId;
         this.projectName = ProjectName;
-        this.description = description;
+        this.projectDescription= projectDescription;
         this.startDate = startDate;
         this.endDate = endDate;
 
@@ -38,12 +38,12 @@ public class Project {
     }
 
 
-    public String getDescription() {
-        return description;
+    public String getProjectDescription() {
+        return projectDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
 

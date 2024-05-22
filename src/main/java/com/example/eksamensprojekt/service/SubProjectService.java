@@ -22,7 +22,9 @@ public class SubProjectService {
     }
 
     public void editSubProject(int subProjectId, Subproject editedSubProject) {
+        System.out.println("Editing Subproject with ID: " + subProjectId);
         subProjectRepository.editSubProject(subProjectId, editedSubProject);
+        System.out.println("Subproject updated: " + editedSubProject);
     }
 
     public void deleteSubProject(int subProjectId) {
@@ -34,10 +36,19 @@ public class SubProjectService {
     }
 
     public Subproject findSubProjectById(int subProjectId) {
-        return subProjectRepository.findSubProjectById(subProjectId);
+        System.out.println("Finding Subproject with ID: " + subProjectId);
+        Subproject subProject = subProjectRepository.findSubProjectById(subProjectId);
+        System.out.println("Found Subproject: " + subProject);
+        return subProject;
     }
 
     public String findProjectNameBySubProjectId(int subProjectId) {
-        return subProjectRepository.findProjectNameBySubProjectId(subProjectId);
+        System.out.println("Finding Project Name for Subproject ID: " + subProjectId);
+        String projectName = subProjectRepository.findProjectNameBySubProjectId(subProjectId);
+        System.out.println("Found Project Name: " + projectName);
+        return projectName;
+    }
+    public List<Subproject> findSubProjectsByProjectId(int projectId) {
+        return subProjectRepository.findByProjectId(projectId);
     }
 }

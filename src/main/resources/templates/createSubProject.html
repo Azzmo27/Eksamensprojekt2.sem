@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Opret Underprojekt</title>
-    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/projectStyleSheet.css">
 </head>
 <body>
 <h2>Opret Underprojekt</h2>
 <div class="container">
     <form action="/createdSubProject" method="POST" th:object="${subProject}">
+        <input type="hidden" name="projectId" th:value="${projectId}" />
+        <label for="subProjectName">Navn på Underprojekt</label><br>
+        <input class="input-field" id="subProjectName" name="subProjectName" th:field="*{subProjectName}" placeholder="Underprojektnavn"><br>
 
-        <p>
-            <label for="subProjectName">Navn på Underprojekt</label><br>
-            <input class="input-field" id="subProjectName" name="subProjectName" th:field="*{subProjectName}" placeholder="Underprojektnavn"><br>
-        </p>
-        <p>
-            <label for="subProjectDescription">Beskrivelse</label><br>
-            <textarea class="input-field" id="subProjectDescription" name="subProjectDescription" th:field="*{subProjectDescription}" rows="4" cols="50" placeholder="Beskrivelse"></textarea><br>
-        </p>
+        <label for="subProjectDescription">Beskrivelse</label><br>
+        <textarea class="input-field" id="subProjectDescription" name="subProjectDescription" th:field="*{subProjectDescription}" rows="4" cols="50" placeholder="Beskrivelse"></textarea><br>
+
         <p>
             <label for="startDate">Startdato</label><br>
             <input class="input-field" id="startDate" name="startDate" type="date" th:field="*{subProjectStartDate}" placeholder="Startdato"><br>
@@ -26,20 +24,17 @@
             <label for="endDate">Slutdato</label><br>
             <input class="input-field" id="endDate" name="endDate" type="date" th:field="*{subProjectEndDate}" placeholder="Slutdato"><br>
         </p>
-
         <p>
             <label for="subProjectStatus">Status</label><br>
             <input class="input-field" id="subProjectStatus" name="subProjectStatus" th:field="*{subProjectStatus}" placeholder="Status"><br>
         </p>
-
         <p>
-            <button class="submit-button" type="submit">Opret Underprojekt</button>
+            <button type="submit">Opret nyt underprojekt</button>
         </p>
-
     </form>
 </div>
 
-<a th:if="${chosenProject != null}" th:href="@{'/chosenProject/' + ${chosenProject.projectName}}">
+<a th:if="${chosenProject != null}" th:href="@{'/createSubProject/' + ${chosenProject.projectId}}">
     <button type="button">Tilbage til Valgt Projekt</button>
 </a>
 

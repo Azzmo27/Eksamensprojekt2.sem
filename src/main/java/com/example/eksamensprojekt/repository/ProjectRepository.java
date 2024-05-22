@@ -14,13 +14,13 @@ public class ProjectRepository {
     private ConnectionManager connectionManager;
 
     public void createProject(Project project) {
-        String sql = "INSERT INTO project (projectName, description, startDate, endDate) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO project (projectName, projectDescription, projectStartDate, projectEndDate) VALUES (?, ?, ?, ?)";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
             stmt.setString(1, project.getProjectName());
-            stmt.setString(2, project.getDescription());
+            stmt.setString(2, project.getProjectDescription());
 
             if (project.getStartDate() != null) {
                 stmt.setDate(3, java.sql.Date.valueOf(project.getStartDate()));
@@ -39,14 +39,15 @@ public class ProjectRepository {
             e.printStackTrace();
         }
     }
+
     public void editProject(String name, Project editProject) {
-        String editSql = "UPDATE project SET projectName = ?, description = ?, startDate = ?, endDate = ? WHERE projectName = ?";
+        String editSql = "UPDATE project SET projectName = ?, projectDescription = ?, projectStartDate = ?, projectEndDate = ? WHERE projectName = ?";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(editSql)
         ) {
             stmt.setString(1, editProject.getProjectName());
-            stmt.setString(2, editProject.getDescription());
+            stmt.setString(2, editProject.getProjectDescription());
 
             if (editProject.getStartDate() != null) {
                 stmt.setDate(3, java.sql.Date.valueOf(editProject.getStartDate()));
@@ -82,7 +83,7 @@ public class ProjectRepository {
 
     public List<Project> findAllProject() {
         List<Project> projects = new ArrayList<>();
-        String sql = "SELECT projectId, projectName, description, startDate, endDate FROM project";
+        String sql = "SELECT projectId, projectName, projectDescription, projectStartDate, projectEndDate FROM project";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql);
@@ -92,14 +93,13 @@ public class ProjectRepository {
                 Project project = new Project();
                 project.setProjectId(rs.getInt("projectId"));
                 project.setProjectName(rs.getString("projectName"));
-                project.setDescription(rs.getString("description"));
+                project.setProjectDescription(rs.getString("projectDescription"));
 
-
-                if (rs.getDate("startDate") != null) {
-                    project.setStartDate(rs.getDate("startDate").toLocalDate());
+                if (rs.getDate("projectStartDate") != null) {
+                    project.setStartDate(rs.getDate("projectStartDate").toLocalDate());
                 }
-                if (rs.getDate("endDate") != null) {
-                    project.setEndDate(rs.getDate("endDate").toLocalDate());
+                if (rs.getDate("projectEndDate") != null) {
+                    project.setEndDate(rs.getDate("projectEndDate").toLocalDate());
                 }
 
                 projects.add(project);
@@ -111,7 +111,7 @@ public class ProjectRepository {
     }
 
     public Project findProjectByName(String name) {
-        String sql = "SELECT projectId, projectName, description, startDate, endDate FROM project WHERE projectName = ?";
+        String sql = "SELECT projectId, projectName, projectDescription, projectStartDate, projectEndDate FROM project WHERE projectName = ?";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
@@ -122,14 +122,41 @@ public class ProjectRepository {
                     Project project = new Project();
                     project.setProjectId(rs.getInt("projectId"));
                     project.setProjectName(rs.getString("projectName"));
-                    project.setDescription(rs.getString("description"));
-
-
-                    if (rs.getDate("startDate") != null) {
-                        project.setStartDate(rs.getDate("startDate").toLocalDate());
+                    project.setProjectDescription(rs.getString("projectDescription"));
+                    if (rs.getDate("projectStartDate") != null) {
+                        project.setStartDate(rs.getDate("projectStartDate").toLocalDate());
                     }
-                    if (rs.getDate("endDate") != null) {
-                        project.setEndDate(rs.getDate("endDate").toLocalDate());
+                    if (rs.getDate("projectEndDate") != null) {
+                        project.setEndDate(rs.getDate("projectEndDate").toLocalDate());
+                    }
+
+                    return project;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Project findProjectById(int projectId) {
+        String sql = "SELECT projectId, projectName, projectDescription, projectStartDate, projectEndDate FROM project WHERE projectId = ?";
+        try (
+                Connection conn = connectionManager.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, projectId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Project project = new Project();
+                    project.setProjectId(rs.getInt("projectId"));
+                    project.setProjectName(rs.getString("projectName"));
+                    project.setProjectDescription(rs.getString("projectDescription"));
+                    if (rs.getDate("projectStartDate") != null) {
+                        project.setStartDate(rs.getDate("projectStartDate").toLocalDate());
+                    }
+                    if (rs.getDate("projectEndDate") != null) {
+                        project.setEndDate(rs.getDate("projectEndDate").toLocalDate());
                     }
 
                     return project;

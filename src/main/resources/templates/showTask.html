@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
-    <title>Vis task</title>
+    <title>Vis Opgaver</title>
 </head>
 <body>
-<h2>Liste over tasks</h2>
+<h2>Liste Over Opgaver</h2>
 
 <table border="1">
     <tr>
-        <th>Task ID</th>
         <th>Navn</th>
         <th>Beskrivelse</th>
         <th>Start Dato</th>
@@ -21,7 +20,6 @@
         <th>Rediger task</th>
     </tr>
     <tr th:each="task : ${tasks}">
-        <td th:text="${task.taskId}"></td>
         <td th:text="${task.taskName}"></td>
         <td th:text="${task.taskDescription}"></td>
         <td th:text="${#temporals.format(task.taskStartDate, 'yyyy-MM-dd')}"></td>

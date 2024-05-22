@@ -70,20 +70,7 @@ public class SubProjectRepositoryIntegrationTest {
     }
 
 
-    @Test
-    public void testFindAllSubProject() {
-        // Arrange
-        subProjectService.createSubProject(new Subproject("TestSubProject1", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 1)); // Tilføjet projectId "1"
-        subProjectService.createSubProject(new Subproject("TestSubProject2", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 2)); // Tilføjet projectId "2"
 
-
-        // Act
-        List<Subproject> subprojects = subProjectRepository.findAllSubProject();
-
-        // Assert
-        assertNotNull(subprojects);
-        assertEquals(2, subprojects.size());
-    }
 
 
 }

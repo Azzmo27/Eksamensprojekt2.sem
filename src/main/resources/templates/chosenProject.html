@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chosen Project Details</title>
+    <link rel="stylesheet" type="text/css" href="../static/projectStyleSheet.css">
+    <title>Valgte Projekt Detaljer</title>
 </head>
 <body>
 <h2>Valgte projekt detaljer</h2>
 <h3>Projekt detaljer</h3>
 <p th:if="${chosenProject != null}">Projekt ID: <span th:text="${chosenProject.projectId}"></span></p>
 <p th:if="${chosenProject != null}">Projektnavn: <span th:text="${chosenProject.projectName}"></span></p>
-<p th:if="${chosenProject != null}">Beskrivelse: <span th:text="${chosenProject.description}"></span></p>
+<p th:if="${chosenProject != null}">Beskrivelse: <span th:text="${chosenProject.projectDescription}"></span></p>
 <p th:if="${chosenProject != null}">Startdato: <span th:text="${#temporals.format(chosenProject.startDate, 'yyyy-MM-dd')}"></span></p>
 <p th:if="${chosenProject != null}">Slutdato: <span th:text="${#temporals.format(chosenProject.endDate, 'yyyy-MM-dd')}"></span></p>
 
@@ -26,14 +27,16 @@
         <th>Handlinger</th>
     </tr>
     <tr th:each="subProject : ${subprojects}">
-        <td th:text="${subProject.subProjectId}"></td>
+        <td>
+            <span th:if="${subProject != null}" th:text="${subProject.subProjectId}"></span>
+        </td>
         <td th:text="${subProject.subProjectName}"></td>
         <td th:text="${subProject.subProjectDescription}"></td>
         <td th:text="${#temporals.format(subProject.subProjectStartDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(subProject.subProjectEndDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${subProject.subProjectStatus}"></td>
         <td>
-            <a th:href="@{'/subproject/details/' + ${subProject.subProjectId}}">Se detaljer</a> |
+            <a th:href="'/chosenProject/' + ${chosenProject.projectId} + '/subproject/details/' + ${subProject.subProjectId}">Se detaljer</a> |
             <form th:action="@{'/deleteSubProject/' + ${subProject.subProjectId}}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette underprojektet?');">
                 <button type="submit">Slet</button>
             </form> |
@@ -42,7 +45,8 @@
     </tr>
 </table>
 
-<a th:href="@{/createSubProject}">
+<!-- Link til at oprette et nyt underprojekt -->
+<a th:href="@{'/createSubProject/' + ${chosenProject.projectId}}">
     <button type="button">Opret nyt underprojekt</button>
 </a>
 
@@ -63,5 +67,27 @@
         <td th:text="${task.timeEstimate}"></td>
     </tr>
 </table>
+
+<!-- Formular til oprettelse af en ny opgave -->
+<h3>Opret ny opgave</h3>
+<form action="/createTask" method="post">
+    <input type="hidden" name="subProjectId" th:value="${subProjectId}" />
+    <label for="taskName">Opgavenavn:</label>
+    <input type="text" id="taskName" name="taskName" required><br>
+
+    <label for="taskDescription">Opgavebeskrivelse:</label><br>
+    <textarea id="taskDescription" name="taskDescription" required></textarea><br>
+
+    <label for="taskStartDate">Startdato:</label>
+    <input type="date" id="taskStartDate" name="taskStartDate"><br>
+
+    <label for="taskEndDate">Slutdato:</label>
+    <input type="date" id="taskEndDate" name="taskEndDate"><br>
+
+    <label for="timeEstimate">Tidsmængde:</label>
+    <input type="number" id="timeEstimate" name="timeEstimate" required><br>
+
+    <button type="submit">Opret opgave</button>
+</form>
 </body>
 </html>

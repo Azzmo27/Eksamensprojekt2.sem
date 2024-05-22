@@ -23,17 +23,17 @@
     <tr th:each="project : ${projects}">
         <td th:text="${project.projectId}"></td>
         <td th:text="${project.projectName}"></td>
-        <td th:text="${project.description}"></td>
+        <td th:text="${project.projectDescription}"></td>
         <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
         <td>
-            <form th:action="@{'/' + ${project.projectName} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette projektet?');">
+            <form th:action="@{'/' + ${project.projectId} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette projektet?');">
                 <input type="hidden" name="_method" value="delete" />
                 <button type="submit">Slet</button>
             </form>
         </td>
-        <td><a th:href="@{'/' + ${project.projectName} + '/editProject'}">Rediger</a></td>
-        <td><a th:href="@{'/chosenProject/' + ${project.projectName}}">Vælg Projekt</a></td>
+        <td><a th:href="@{'/' + ${project.projectId} + '/editProject'}">Rediger</a></td>
+        <td><a th:href="@{'/chosenProject/' + ${project.projectId}}">Vælg Projekt</a></td>
     </tr>
 </table>
 

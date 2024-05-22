@@ -18,14 +18,14 @@ public class ProjectService {
 
     public void createProject(Project project) {
         projectRepository.createProject(project);
-
     }
-    public List<Project> findProject() {
+
+    public List<Project> findProjects() {
         return projectRepository.findAllProject();
     }
 
-    public void editProject(String name, Project editProject) {
-        projectRepository.editProject(name, editProject);
+    public void editProject(String name, Project editedProject) {
+        projectRepository.editProject(name, editedProject);
     }
 
     public void deleteProject(String projectName) {
@@ -36,5 +36,8 @@ public class ProjectService {
         return projectRepository.findProjectByName(projectName);
     }
 
+    public Project findProjectById(int projectId) {
+        return projectRepository.findProjectById(projectId);
+    }
 
 }

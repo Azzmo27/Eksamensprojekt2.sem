@@ -34,7 +34,7 @@ public class ProjectController implements ErrorController {
         this.subProjectService = subProjectService;
         this.taskService = taskService;
         this.userService = userService;
-        this.subProjectRepository = subProjectRepository;
+        this.subProjectRepository = subProjectRepository ;
     }
 
     @GetMapping("/")
@@ -56,7 +56,7 @@ public class ProjectController implements ErrorController {
 
     @GetMapping("/showProject")
     public String showProjects(Model model) {
-        List<Project> projects = projectService.findProject();
+        List<Project> projects = projectService.findProjects();
         model.addAttribute("projects", projects);
         return "showProject";
     }
@@ -71,7 +71,6 @@ public class ProjectController implements ErrorController {
         projectService.deleteProject(projectName);
         return "redirect:/showProject";
     }
-
     @GetMapping("/{projectName}/editProject")
     public String editProject(@PathVariable("projectName") String projectName, Model model) {
         Project project = projectService.findProjectByName(projectName);
@@ -84,17 +83,24 @@ public class ProjectController implements ErrorController {
         projectService.editProject(editProject.getProjectName(), editProject);
         return "redirect:/showProject";
     }
-
-    @GetMapping("/createSubProject")
-    public String showCreateSubProjectForm(Model model) {
-        model.addAttribute("subProject", new Subproject());
+    @GetMapping("/createSubProject/{projectId}")
+    public String showCreateSubProjectForm(@PathVariable int projectId, Model model) {
+        Subproject subProject = new Subproject();
+        Project chosenProject = projectService.findProjectById(projectId);
+        model.addAttribute("subProject", subProject);
+        model.addAttribute("chosenProject", chosenProject);
+        model.addAttribute("projectId", projectId);
         return "createSubProject";
     }
 
-    @PostMapping("/createdSubProject/{projectId}") // Tilføjet projectId i stien
-    public String createSubProject(@ModelAttribute("subProject") Subproject subProject, @PathVariable int projectId) { // Tilføjet projectId som argument
-        subProjectService.createSubProject(subProject, projectId); // Kald createSubProject med både subProject og projectId
-        return "redirect:/chosenProject/" + projectId; // Redirect til valgte projekt baseret på projectId
+    @PostMapping("/createdSubProject")
+    public String createSubProject(@ModelAttribute("subProject") Subproject subProject, @RequestParam("projectId") int projectId, Model model) {
+        System.out.println("Received projectId: " + projectId);
+        System.out.println("Received subProject: " + subProject);
+
+        subProjectService.createSubProject(subProject, projectId);
+
+        return "redirect:/chosenProject/" + projectId;
     }
 
 
@@ -102,49 +108,55 @@ public class ProjectController implements ErrorController {
     public String deleteSubProject(@PathVariable int subProjectId) {
         Subproject deletedSubproject = subProjectService.findSubProjectById(subProjectId);
         if (deletedSubproject != null) {
-            int projectId = deletedSubproject.getProjectId(); // Brug getProjectId() i stedet for getSubProjectId()
+            int projectId = deletedSubproject.getProjectId();
             subProjectService.deleteSubProject(subProjectId);
-            return "redirect:/chosenProject/" + projectId; // Redirect til valgte projekt baseret på projektets ID
+            return "redirect:/chosenProject/" + projectId;
         } else {
-            return "redirect:/errorPage"; // Håndter tilfældet hvor deletedSubproject er null
+            return "redirect:/error";
         }
-
     }
 
-        @GetMapping("/editSubProject/{subProjectId}")
+    @GetMapping("/editSubProject/{subProjectId}")
     public String editSubProject(@PathVariable int subProjectId, Model model) {
         Subproject subProject = subProjectService.findSubProjectById(subProjectId);
         String projectName = subProjectService.findProjectNameBySubProjectId(subProjectId);
+        Project chosenProject = projectService.findProjectByName(projectName);
+        model.addAttribute("chosenProject", chosenProject);
         model.addAttribute("editSubProject", subProject);
         model.addAttribute("projectName", projectName);
         return "editSubProject";
-
     }
 
     @PostMapping("/editSubProject/{subProjectId}")
-    public String updateSubProject(@PathVariable int subProjectId, @ModelAttribute Subproject subProject) {
+    public String updateSubProject(@PathVariable int subProjectId, @ModelAttribute Subproject subProject, Model model) {
         subProjectService.editSubProject(subProjectId, subProject);
-        return "redirect:/chosenProject/" + subProjectId; // Redirect using subProjectId
+        return "redirect:/chosenProject/" + subProject.getProjectId();
     }
-    @GetMapping("/chosenProject/{projectName}")
-    public String showChosenProject(@PathVariable("projectName") String projectName, Model model) {
-        Project chosenProject = projectService.findProjectByName(projectName);
+
+
+    @GetMapping("/chosenProject/{projectId}")
+    public String showChosenProject(@PathVariable int projectId, Model model) {
+        Project chosenProject = projectService.findProjectById(projectId);
         if (chosenProject == null) {
-            // Håndter tilfældet hvor projektet ikke blev fundet
             return "errorPage";
         }
-        List<Subproject> subprojects = subProjectService.findAllSubProject();
+        List<Subproject> subprojects = subProjectService.findSubProjectsByProjectId(projectId);
         model.addAttribute("chosenProject", chosenProject);
         model.addAttribute("subprojects", subprojects);
+        model.addAttribute("subProjectId", projectId);
+
+        List<Task> tasks = taskService.findTasksBySubProjectId(projectId);
+        model.addAttribute("tasks", tasks);
+
         return "chosenProject";
     }
 
-    @GetMapping("/chosenProject/{projectName}/subproject/details/{subProjectId}")
-    public String showSubProjectDetails(@PathVariable("projectName") String projectName, @PathVariable("subProjectId") int subProjectId, Model model) {
-        Project chosenProject = projectService.findProjectByName(projectName);
+
+    @GetMapping("/chosenProject/{projectId}/subproject/details/{subProjectId}")
+    public String showSubProjectDetails(@PathVariable("projectId") int projectId, @PathVariable("subProjectId") int subProjectId, Model model) {
+        Project chosenProject = projectService.findProjectById(projectId);
         Subproject subProject = subProjectService.findSubProjectById(subProjectId);
         if (chosenProject == null || subProject == null) {
-            // Håndter tilfældet hvor projektet eller underprojektet ikke blev fundet
             return "errorPage";
         }
         List<Task> tasks = taskService.findTasksBySubProjectId(subProjectId);
@@ -152,6 +164,13 @@ public class ProjectController implements ErrorController {
         model.addAttribute("subProject", subProject);
         model.addAttribute("tasks", tasks);
         return "chosenProject";
+    }
+    @GetMapping("/showTasks/{subProjectId}")
+    public String showTasksBySubProjectId(@PathVariable("subProjectId") int subProjectId, Model model) {
+        List<Task> tasks = taskService.findTasksBySubProjectId(subProjectId);
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("subProjectId", subProjectId);
+        return "showTask";
     }
 
 
