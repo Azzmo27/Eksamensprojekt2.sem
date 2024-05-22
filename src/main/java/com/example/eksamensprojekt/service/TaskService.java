@@ -16,24 +16,23 @@ public class TaskService {
         taskRepository.createTask(task);
     }
 
-    public void editTask(String name, Task editTask){
-        taskRepository.editTask(name, editTask);
+    public void editTask(int taskId, Task editTask) {
+        taskRepository.editTask(taskId, editTask);
     }
 
-    public void deleteTask(String taskName) {
-        taskRepository.deleteTask(taskName);
+    public void deleteTask(int taskId) {
+        taskRepository.deleteTask(taskId);
     }
 
-    public Task findTaskByName(String taskName) {
-        return taskRepository.findTaskByName(taskName);
+    public Task findTaskById(int taskId) {
+        return taskRepository.findTaskById(taskId);
     }
 
-    public List<Task> findAllTasks(){
+    public List<Task> findAllTasks() {
         return taskRepository.findAllTasks();
     }
 
     public List<Task> findTasksBySubProjectId(int subProjectId) {
         return taskRepository.findTasksBySubProjectId(subProjectId);
     }
-
 }

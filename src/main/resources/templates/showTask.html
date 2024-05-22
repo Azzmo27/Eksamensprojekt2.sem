@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/projectStyleSheet.css">
     <title>Vis Opgaver</title>
 </head>
 <body>
@@ -26,13 +26,13 @@
         <td th:text="${#temporals.format(task.taskEndDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${task.timeEstimate}"></td>
         <td>
-            <form th:action="@{'/tasks/' + ${task.taskName} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette task?');">
+            <form th:action="@{'/tasks/' + ${task.taskId} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette task?');">
                 <input type="hidden" name="_method" value="delete" />
                 <button type="submit">Slet</button>
             </form>
         </td>
         <td>
-            <form th:action="@{'/tasks/' + ${task.taskName} + '/editTask'}" method="get">
+            <form th:action="@{'/tasks/' + ${task.taskId} + '/editTask'}" method="get">
                 <button type="submit">Rediger</button>
             </form>
         </td>

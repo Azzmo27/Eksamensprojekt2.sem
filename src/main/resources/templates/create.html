@@ -10,19 +10,18 @@
 <h2>Opret Projekt</h2>
 <form action="/create" method="post">
     <label for="projectName">Projektnavn:</label><br>
-    <input type="text" id="projectName" name="projectName"><br>
+    <input type="text" id="projectName" name="projectName" required><br>
 
     <label for="description">Beskrivelse:</label><br>
-    <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
+    <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
 
     <label for="startDate">Startdato:</label><br>
-    <input type="date" id="startDate" name="startDate"><br>
+    <input type="date" id="startDate" name="startDate" required><br>
 
     <label for="endDate">Slutdato:</label><br>
-    <input type="date" id="endDate" name="endDate"><br>
+    <input type="date" id="endDate" name="endDate" required><br>
 
     <input type="submit" value="Opret Projekt">
-
 </form>
 </body>
 </html>

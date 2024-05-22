@@ -81,6 +81,7 @@ public class ProjectRepository {
         }
     }
 
+
     public List<Project> findAllProject() {
         List<Project> projects = new ArrayList<>();
         String sql = "SELECT projectId, projectName, projectDescription, projectStartDate, projectEndDate FROM project";

@@ -45,7 +45,7 @@
     </tr>
 </table>
 
-<!-- Link til at oprette et nyt underprojekt -->
+
 <a th:href="@{'/createSubProject/' + ${chosenProject.projectId}}">
     <button type="button">Opret nyt underprojekt</button>
 </a>
@@ -68,7 +68,6 @@
     </tr>
 </table>
 
-<!-- Formular til oprettelse af en ny opgave -->
 <h3>Opret ny opgave</h3>
 <form action="/createTask" method="post">
     <input type="hidden" name="subProjectId" th:value="${subProjectId}" />

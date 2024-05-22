@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="../static/projectStyleSheet.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Underprojekt Detaljer</title>
+
+</head>
+<body>
+<h2>Underprojekt Detaljer</h2>
+<div>
+    <h3>Projekt Information</h3>
+    <p>Projektnavn: <span th:text="${chosenProject.projectId}"></span></p>
+
+</div>
+<div>
+    <h3>Underprojekt Information</h3>
+    <p>Underprojektnavn: <span th:text="${subProject.subProjectId}"></span></p>
+
+</div>
+<div>
+    <h3>Opgaver</h3>
+    <ul>
+        <li th:each="task : ${tasks}" th:text="${task.taskName}"></li>
+
+    </ul>
+</div>
+</body>
+</html>

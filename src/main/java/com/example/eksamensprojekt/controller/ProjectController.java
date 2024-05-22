@@ -133,7 +133,6 @@ public class ProjectController implements ErrorController {
         return "redirect:/chosenProject/" + subProject.getProjectId();
     }
 
-
     @GetMapping("/chosenProject/{projectId}")
     public String showChosenProject(@PathVariable int projectId, Model model) {
         Project chosenProject = projectService.findProjectById(projectId);
@@ -144,7 +143,6 @@ public class ProjectController implements ErrorController {
         model.addAttribute("chosenProject", chosenProject);
         model.addAttribute("subprojects", subprojects);
         model.addAttribute("subProjectId", projectId);
-
         List<Task> tasks = taskService.findTasksBySubProjectId(projectId);
         model.addAttribute("tasks", tasks);
 
@@ -163,7 +161,7 @@ public class ProjectController implements ErrorController {
         model.addAttribute("chosenProject", chosenProject);
         model.addAttribute("subProject", subProject);
         model.addAttribute("tasks", tasks);
-        return "chosenProject";
+        return "subProjectDetails";
     }
     @GetMapping("/showTasks/{subProjectId}")
     public String showTasksBySubProjectId(@PathVariable("subProjectId") int subProjectId, Model model) {
@@ -183,9 +181,8 @@ public class ProjectController implements ErrorController {
     @PostMapping("/createTask")
     public String createTask(@ModelAttribute("task") Task task) {
         taskService.createTask(task);
-        return "redirect:/showTask";
+        return "redirect:/showTasks";
     }
-
     @GetMapping("/showTasks")
     public String showTasks(Model model) {
         List<Task> tasks = taskService.findAllTasks();
@@ -193,46 +190,22 @@ public class ProjectController implements ErrorController {
         return "showTask";
     }
 
-    @PostMapping("/tasks/{taskName}/delete")
-    public String deleteTaskByName(@PathVariable("taskName") String taskName) {
-        taskService.deleteTask(taskName);
-        return "redirect:/showTask";
+    @PostMapping("/tasks/{taskId}/delete")
+    public String deleteTaskById(@PathVariable("taskId") int taskId) {
+        taskService.deleteTask(taskId);
+        return "redirect:/showTasks";
     }
 
-    @GetMapping("/tasks/{taskName}/editTask")
-    public String editTask(@PathVariable("taskName") String taskName, Model model) {
-        Task task = taskService.findTaskByName(taskName);
-        model.addAttribute("editTask", task);
+    @GetMapping("/tasks/{taskId}/editTask")
+    public String editTask(@PathVariable("taskId") int taskId, Model model) {
+        Task task = taskService.findTaskById(taskId);
+        model.addAttribute("task", task);
         return "editTask";
     }
 
     @PostMapping("/editTask")
-    public String editTask(@ModelAttribute Task editTask) {
-        taskService.editTask(editTask.getTaskName(), editTask);
-        return "redirect:/showTask"; // Corrected redirection
-    }
-
-    @GetMapping("/login")
-    public String frontPage() {
-        return "login";
-    }
-
-    @PostMapping("/newRegistration")
-    public String newRegistration(@ModelAttribute User user, @RequestParam("username") String username, @RequestParam("user_password") String user_password) throws SQLException {
-        userService.createNewUser(user);
-        int userId = userService.getUserId(username, user_password);
-        return "index";
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("user_password") String user_password, Model model) throws SQLException {
-        model.addAttribute("user", userService.verifyUserLogin(username, user_password));
-
-        if (userService.verifyUserLogin(username, user_password)) {
-            int userId = userService.getUserId(username, user_password);
-            return "redirect:/index";
-        } else {
-            return "login";
-        }
+    public String editTask(@ModelAttribute Task task) {
+        taskService.editTask(task.getTaskId(), task);
+        return "redirect:/showTasks";
     }
 }

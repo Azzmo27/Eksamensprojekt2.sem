@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/projectStyleSheet.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/projectStyleSheet.css">
     <title>Vis Projekter</title>
 </head>
 <body>
@@ -27,9 +27,9 @@
         <td th:text="${#temporals.format(project.startDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
         <td>
-            <form th:action="@{'/' + ${project.projectId} + '/delete'}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette projektet?');">
-                <input type="hidden" name="_method" value="delete" />
-                <button type="submit">Slet</button>
+            <form th:action="@{/deleteProject/{projectName}(projectName=${project.projectName})}" method="post" onsubmit="return confirm('Are you sure you want to delete the project?');">
+                <input type="hidden" name="_method" value="post" />
+                <button type="submit">Delete</button>
             </form>
         </td>
         <td><a th:href="@{'/' + ${project.projectId} + '/editProject'}">Rediger</a></td>

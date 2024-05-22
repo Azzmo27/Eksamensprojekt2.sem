@@ -7,9 +7,6 @@
 <body>
 <h2>Rediger Task</h2>
 <form action="/editTask" method="post" th:object="${editTask}">
-
-  <input type="hidden" name="taskName" th:value="${editTask.taskName}" />
-
   <p>
     <label for="editTaskName">Navn:</label>
     <input id="editTaskName" type="text" name="taskName" th:value="${editTask.taskName}">
