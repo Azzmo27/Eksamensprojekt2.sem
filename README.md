@@ -1,2 +1,2 @@
 Hvad?
-Projektet er et "Calculation Tool" for projekter, som har til formål at give et overblik over arbejdsprocesser
+Dette er et projekt KalkulationsVærktøj, som har til formål at give et overblik over arbejdsprocesser.
