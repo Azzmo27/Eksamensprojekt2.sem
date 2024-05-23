@@ -7,24 +7,28 @@
 </head>
 <body>
 <h2>Rediger Projekt</h2>
-<form action="/editProject" method="post" th:object="${editProject}">
-    <input type="hidden" name="projectName" th:if="${editProject != null}" th:value="${editProject.projectName}" />
+<form th:action="@{/editProject}" method="post" th:object="${editProject}">
+    <input type="hidden" name="projectId" th:value="${editProject.projectId}" />
+    <p>
+        <label for="editProjectName">Projektnavn:</label>
+        <input id="editProjectName" type="text" name="projectName" th:value="${editProject.projectName}" required>
+    </p>
     <p>
         <label for="editDescription">Beskrivelse:</label>
-        <input id="editDescription" type="text" name="description" th:if="${editProject != null}" th:value="${editProject.projectDescription}">
+        <input id="editDescription" type="text" name="projectDescription" th:value="${editProject.projectDescription}" required>
     </p>
     <p>
         <label for="editStartDate">Start Dato:</label>
-        <input id="editStartDate" type="date" name="startDate" th:if="${editProject != null}" th:value="${editProject.startDate}">
+        <input id="editStartDate" type="date" name="startDate" th:value="${editProject.startDate}" required>
     </p>
     <p>
         <label for="editEndDate">Slut Dato:</label>
-        <input id="editEndDate" type="date" name="endDate" th:if="${editProject != null}" th:value="${editProject.endDate}">
+        <input id="editEndDate" type="date" name="endDate" th:value="${editProject.endDate}" required>
     </p>
     <button type="submit">Opdater Projekt</button>
 </form>
 
-<a th:href="@{'/showProject'}">
+<a th:href="@{/showProject}">
     <button type="button">Tilbage til Projekter</button>
 </a>
 </body>

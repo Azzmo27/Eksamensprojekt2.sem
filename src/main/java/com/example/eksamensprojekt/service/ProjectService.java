@@ -9,8 +9,9 @@ import java.util.List;
 
 @Service
 public class ProjectService {
+
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     public ProjectService(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
@@ -24,12 +25,9 @@ public class ProjectService {
         return projectRepository.findAllProject();
     }
 
-    public void editProject(String name, Project editedProject) {
-        projectRepository.editProject(name, editedProject);
-    }
-
-    public void deleteProject(String projectName) {
-        projectRepository.deleteProject(projectName);
+    public void editProject(int projectId, Project editedProject) {
+        System.out.println("Updating Project: " + editedProject);
+        projectRepository.editProject(projectId, editedProject);
     }
 
     public Project findProjectByName(String projectName) {
@@ -40,4 +38,7 @@ public class ProjectService {
         return projectRepository.findProjectById(projectId);
     }
 
+    public void deleteProjectById(int projectId) {
+        projectRepository.deleteProjectById(projectId);
+    }
 }

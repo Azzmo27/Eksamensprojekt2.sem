@@ -15,24 +15,13 @@ public class ProjectRepository {
 
     public void createProject(Project project) {
         String sql = "INSERT INTO project (projectName, projectDescription, projectStartDate, projectEndDate) VALUES (?, ?, ?, ?)";
-        try (
-                Connection conn = connectionManager.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
-        ) {
+        try (Connection conn = connectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, project.getProjectName());
             stmt.setString(2, project.getProjectDescription());
-
-            if (project.getStartDate() != null) {
-                stmt.setDate(3, java.sql.Date.valueOf(project.getStartDate()));
-            } else {
-                stmt.setNull(3, Types.DATE);
-            }
-
-            if (project.getEndDate() != null) {
-                stmt.setDate(4, java.sql.Date.valueOf(project.getEndDate()));
-            } else {
-                stmt.setNull(4, Types.DATE);
-            }
+            stmt.setDate(3, java.sql.Date.valueOf(project.getStartDate()));
+            stmt.setDate(4, java.sql.Date.valueOf(project.getEndDate()));
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -40,46 +29,39 @@ public class ProjectRepository {
         }
     }
 
-    public void editProject(String name, Project editProject) {
-        String editSql = "UPDATE project SET projectName = ?, projectDescription = ?, projectStartDate = ?, projectEndDate = ? WHERE projectName = ?";
-        try (
-                Connection conn = connectionManager.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(editSql)
-        ) {
+    public void editProject(int projectId, Project editProject) {
+        String editSql = "UPDATE project SET projectName = ?, projectDescription = ?, projectStartDate = ?, projectEndDate = ? WHERE projectId = ?";
+        try (Connection conn = connectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(editSql)) {
+
+            System.out.println("Executing SQL: " + editSql);
             stmt.setString(1, editProject.getProjectName());
             stmt.setString(2, editProject.getProjectDescription());
+            stmt.setDate(3, java.sql.Date.valueOf(editProject.getStartDate()));
+            stmt.setDate(4, java.sql.Date.valueOf(editProject.getEndDate()));
+            stmt.setInt(5, projectId);
 
-            if (editProject.getStartDate() != null) {
-                stmt.setDate(3, java.sql.Date.valueOf(editProject.getStartDate()));
-            } else {
-                stmt.setNull(3, Types.DATE);
-            }
-
-            if (editProject.getEndDate() != null) {
-                stmt.setDate(4, java.sql.Date.valueOf(editProject.getEndDate()));
-            } else {
-                stmt.setNull(4, Types.DATE);
-            }
-
-            stmt.setString(5, name);
-            stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Rows affected: " + rowsAffected);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteProject(String projectName) {
-        String deleteSql = "DELETE FROM project WHERE projectName = ?";
+
+    public void deleteProjectById(int projectId) {
+        String deleteSql = "DELETE FROM project WHERE projectId = ?";
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(deleteSql)
         ) {
-            stmt.setString(1, projectName);
+            stmt.setInt(1, projectId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
 
     public List<Project> findAllProject() {
@@ -168,4 +150,5 @@ public class ProjectRepository {
         }
         return null;
     }
+
 }

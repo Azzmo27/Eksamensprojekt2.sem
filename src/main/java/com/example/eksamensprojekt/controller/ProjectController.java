@@ -66,23 +66,27 @@ public class ProjectController implements ErrorController {
         return "errorPage";
     }
 
-    @PostMapping("/{projectName}/delete")
-    public String deleteProjectByName(@PathVariable("projectName") String projectName) {
-        projectService.deleteProject(projectName);
+    @PostMapping("/deleteProject/{projectId}")
+    public String deleteProjectById(@PathVariable("projectId") int projectId) {
+        projectService.deleteProjectById(projectId);
         return "redirect:/showProject";
     }
-    @GetMapping("/{projectName}/editProject")
-    public String editProject(@PathVariable("projectName") String projectName, Model model) {
-        Project project = projectService.findProjectByName(projectName);
+
+
+    @GetMapping("/{projectId}/editProject")
+    public String editProject(@PathVariable("projectId") int projectId, Model model) {
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("editProject", project);
         return "editProject";
     }
 
     @PostMapping("/editProject")
     public String editProject(@ModelAttribute Project editProject) {
-        projectService.editProject(editProject.getProjectName(), editProject);
+        System.out.println("Received Project: " + editProject);
+        projectService.editProject(editProject.getProjectId(), editProject);
         return "redirect:/showProject";
     }
+
     @GetMapping("/createSubProject/{projectId}")
     public String showCreateSubProjectForm(@PathVariable int projectId, Model model) {
         Subproject subProject = new Subproject();

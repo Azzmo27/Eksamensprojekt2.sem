@@ -25,11 +25,11 @@ public class ProjectRepositoryTest {
 
     @Test
     public void testEditProject() {
-        String projectName = "Project1";
+        int projectId = 1;
         Project editedProject = new Project(1, "UpdatedProject1", "UpdatedDescription1", LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10));
 
-        projectRepository.editProject(projectName, editedProject);
+        projectRepository.editProject(projectId, editedProject);
 
-        verify(projectRepository, times(1)).editProject(projectName, editedProject);
+        verify(projectRepository, times(1)).editProject(projectId, editedProject);
     }
 }
