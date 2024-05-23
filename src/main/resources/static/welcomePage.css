@@ -54,18 +54,18 @@ h1, h2, h3, p, a, th, td {
 }
 .buttons {
     position: absolute;
-    top: 50%; /* Placer knappen 50% ned fra toppen af siden */
-    left: 50%; /* Placer knappen 50% ind fra venstre side af siden */
-    transform: translate(-50%, -50%); /* Flyt knappen tilbage med halvdelen af dens egen bredde og højde */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .button {
     background-color: #0077ff;
     border-radius: 11px;
     color: #fff;
-    padding: 5px 10px; /* Juster padding efter behov */
+    padding: 5px 10px;
     transition: background-color 0.2s ease-in-out;
-    text-decoration: none; /* Fjern understregning fra link */
+    text-decoration: none;
 }
 
 .button:hover {
@@ -134,9 +134,9 @@ h1, h2, h3, p, a, th, td {
     margin: 20px;
 }
 
-/* Her ændres "URL_TIL_LOGO" til den faktiske URL til dit logo-billede */
+
 .logo-bottom-right img {
-    width: 250px; /* Juster størrelsen efter behov */
+    width: 250px;
     height: auto;
 }
 .logo-middle {
@@ -147,6 +147,6 @@ h1, h2, h3, p, a, th, td {
     width: 90%;
     padding: 20px;
     text-align: center;
-    font-size: 14px; /* Juster skriftstørrelsen efter behov */
+    font-size: 14px;
 }
 
