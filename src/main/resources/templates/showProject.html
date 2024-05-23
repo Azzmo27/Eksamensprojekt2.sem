@@ -28,11 +28,19 @@
         <td th:text="${#temporals.format(project.endDate, 'yyyy-MM-dd')}"></td>
         <td>
             <form th:action="@{/deleteProject/{projectId}(projectId=${project.projectId})}" method="post" onsubmit="return confirm('Er du sikker på, at du vil slette projektet?');">
-                <button type="submit">Slet</button>
+                <button type="submit" class="button">Slet</button>
             </form>
         </td>
-        <td><a th:href="@{'/' + ${project.projectId} + '/editProject'}">Rediger</a></td>
-        <td><a th:href="@{'/chosenProject/' + ${project.projectId}}">Vælg Projekt</a></td>
+        <td>
+            <form th:action="@{'/' + ${project.projectId} + '/editProject'}" method="get">
+                <button type="submit" class="button">Rediger</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/chosenProject/' + ${project.projectId}}" method="get">
+                <button type="submit" class="button">Vælg Projekt</button>
+            </form>
+        </td>
     </tr>
 </table>
 

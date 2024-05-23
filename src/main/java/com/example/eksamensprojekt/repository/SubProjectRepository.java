@@ -14,14 +14,14 @@ public class SubProjectRepository {
     private ConnectionManager connectionManager;
 
     public void createSubProject(Subproject subProject, int projectId) {
-        // Update the SQL statement to include projectId correctly
+
         String sql = "INSERT INTO Subproject (projectId, subProjectName, subProjectDescription, subProjectStartDate, subProjectEndDate, subProjectStatus) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (
                 Connection conn = connectionManager.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)
         ) {
-            // Set the correct parameters
+
             stmt.setInt(1, projectId);
             stmt.setString(2, subProject.getSubProjectName());
             stmt.setString(3, subProject.getSubProjectDescription());
@@ -127,7 +127,7 @@ public class SubProjectRepository {
                         subproject.setSubProjectEndDate(endDate.toLocalDate());
                     }
                     subproject.setSubProjectStatus(rs.getString("subProjectStatus"));
-                    subproject.setSubProjectId(subProjectId); // Set the correct ID for the subproject
+                    subproject.setSubProjectId(subProjectId);
                     System.out.println("Found Subproject: " + subProjectId);
                     return subproject;
                 }

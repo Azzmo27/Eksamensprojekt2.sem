@@ -44,7 +44,7 @@ public class UserRepository {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, userPassword);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Return true if there is at least one row in the result
+                return resultSet.next();
             }
         } catch (SQLException e) {
             e.printStackTrace();
