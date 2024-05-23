@@ -1,6 +1,6 @@
-
 body {
     font-family: "Helvetica", sans-serif;
+    background-image: url("https://slidescorner.com/wp-content/uploads/2024/02/Wallpaper-Mental-Health-PowerPoint-Background-by-SlidesCorner.com_.jpg");
     background-color: rgb(231, 231, 231);
     margin: 0;
     padding: 0;
@@ -52,21 +52,20 @@ h1, h2, h3, p, a, th, td {
     padding: 25px;
     border-radius: 40px;
 }
-
-/* Knapper */
 .buttons {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width: 50vw;
+    position: absolute;
+    top: 50%; /* Placer knappen 50% ned fra toppen af siden */
+    left: 50%; /* Placer knappen 50% ind fra venstre side af siden */
+    transform: translate(-50%, -50%); /* Flyt knappen tilbage med halvdelen af dens egen bredde og højde */
 }
 
 .button {
     background-color: #0077ff;
     border-radius: 11px;
     color: #fff;
-    padding: 3%;
+    padding: 5px 10px; /* Juster padding efter behov */
     transition: background-color 0.2s ease-in-out;
+    text-decoration: none; /* Fjern understregning fra link */
 }
 
 .button:hover {
@@ -125,3 +124,29 @@ h1, h2, h3, p, a, th, td {
     color: #111;
     background: #f5f5f5;
 }
+/* Tilføj dette til din eksisterende CSS */
+
+.logo-bottom-right {
+    position: fixed;
+    bottom: -11%;
+    right: -68%;
+    left: -10%;
+    margin: 20px;
+}
+
+/* Her ændres "URL_TIL_LOGO" til den faktiske URL til dit logo-billede */
+.logo-bottom-right img {
+    width: 250px; /* Juster størrelsen efter behov */
+    height: auto;
+}
+.logo-middle {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px; /* Juster skriftstørrelsen efter behov */
+}
+
