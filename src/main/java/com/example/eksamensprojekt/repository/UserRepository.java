@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 @Repository
 public class UserRepository {
@@ -17,7 +16,7 @@ public class UserRepository {
     private ConnectionManager connectionManager;
 
     public void createUser(User user) {
-        String sql = "INSERT INTO user (username, user_password, first_name, last_name, email, role, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO AppUser (username, user_password, firstName, lastName, email, role) VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 Connection connection = connectionManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
@@ -28,7 +27,6 @@ public class UserRepository {
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setString(6, user.getRole());
-            preparedStatement.setInt(7, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,7 +34,7 @@ public class UserRepository {
     }
 
     public boolean verifyUserLogin(String username, String userPassword) {
-        String sql = "SELECT username, user_password FROM user WHERE username = ? AND user_password = ?";
+        String sql = "SELECT username, user_password FROM AppUser WHERE username = ? AND user_password = ?";
         try (
                 Connection connection = connectionManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
@@ -53,7 +51,7 @@ public class UserRepository {
     }
 
     public int getUserId(String username, String userPassword) {
-        String sql = "SELECT user_id FROM user WHERE username = ? AND user_password = ?";
+        String sql = "SELECT user_id FROM AppUser WHERE username = ? AND user_password = ?";
         try (
                 Connection connection = connectionManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
@@ -74,18 +72,17 @@ public class UserRepository {
     }
 
     public void save(User user) {
-        String sql = "INSERT INTO users (first_name, last_name, username, user_password, email, role, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO AppUser (username, user_password, firstName, lastName, email, role) VALUES (?, ?, ?, ?, ?, ?)";
         try (
                 Connection connection = connectionManager.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(sql)
         ) {
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getUsername());
-            preparedStatement.setString(4, user.getUserPassword());
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getUserPassword());
+            preparedStatement.setString(3, user.getFirstName());
+            preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getEmail());
             preparedStatement.setString(6, user.getRole());
-            preparedStatement.setInt(7, user.getUserId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

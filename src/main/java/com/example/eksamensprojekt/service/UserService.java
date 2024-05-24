@@ -12,15 +12,15 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public void createNewUser(User u) throws SQLException {
-        userRepository.createUser(u);
+    public void createUser(User user) {
+        userRepository.createUser(user);
     }
 
-    public Boolean verifyUserLogin(String username, String userPassword) throws SQLException {
+    public Boolean verifyUserLogin(String username, String userPassword) {
         return userRepository.verifyUserLogin(username, userPassword);
     }
 
-    public int getUserId(String username, String userPassword) throws SQLException {
+    public int getUserId(String username, String userPassword) {
         return userRepository.getUserId(username, userPassword);
     }
 

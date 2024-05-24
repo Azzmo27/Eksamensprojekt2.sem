@@ -1,23 +1,21 @@
 package com.example.eksamensprojekt.model;
 
 public class User {
+    private int userId;
     private String username;
     private String userPassword;
     private String firstName;
     private String lastName;
     private String email;
     private String role;
-    private int userId;
 
-    public User() {}
+    // Getters and Setters
 
-    public User(String username, String userPassword, String firstName, String lastName, String email, String role, int userId) {
-        this.username = username;
-        this.userPassword = userPassword;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.role = role;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -25,37 +23,47 @@ public class User {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getUserPassword() {
         return userPassword;
     }
 
-
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public String getLastName() {
         return lastName;
     }
 
-
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getRole() {
         return role;
     }
-    public int getUserId(){
-        return userId;
+
+    public void setRole(String role) {
+        this.role = role;
     }
-
 }
-
-
-

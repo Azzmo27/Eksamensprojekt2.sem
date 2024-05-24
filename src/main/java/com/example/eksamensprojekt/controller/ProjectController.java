@@ -37,10 +37,6 @@ public class ProjectController implements ErrorController {
         this.subProjectRepository = subProjectRepository ;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
 
     @GetMapping("/create")
     public String createProjectForm(Model model) {

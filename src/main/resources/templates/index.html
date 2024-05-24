@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/welcomePage.css}" rel="stylesheet">
+    <link href="@{/welcomePage.css}" rel="stylesheet">
     <title>Hjemmeside</title>
 </head>
 
@@ -13,10 +13,12 @@
 
 <a class="button" href="/create">Opret Nyt Projekt</a>
 
+<p>Har du allerede en konto? <a href="/login">Log ind her</a></p>
+
 <footer class="logo-middle">
     <div class="footer-content">
         <div class="contact-info">
-                <p>Kontakt os:</p>
+            <p>Kontakt os:</p>
             <p>Email: info@example.com</p>
             <p>Telefon: +45 1234 5678</p>
         </div>

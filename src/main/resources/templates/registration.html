@@ -1,40 +1,47 @@
 <!DOCTYPE html>
-<html lang="da" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Registrering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{/welcomePage.css}" rel="stylesheet">
+    <title>Registrering</title>
 </head>
 <body>
-<div id="menuHeader">
-    Alpha Solution
-</div>
-<div class="container">
-    <div class="card">
-        <div class="inner-box">
-            <div class="card-front"> </div>
-            <h1 style="text-shadow: 2px 2px 4px gray;">REGISTRER DIG HER</h1>
-            <form action="/newRegistration" method="post">
-                <input type="text" name="first_name" class="input-box" placeholder="Fornavn" required> <br> <br>
-                <input type="text" name="last_name" class="input-box" placeholder="Efternavn" required>  <br> <br>
-                <input type="email" name="username" class="input-box" placeholder="Email" required>  <br> <br>
-                <input type="password" name="user_password" class="input-box" placeholder="Adgangskode" required> <br> <br>
-                <select name="role" class="input-box" required>
-                    <option value="" disabled selected>Vælg din rolle</option>
-                    <option value="PROJECT_LEADER">Projektleder</option>
-                    <option value="DEVELOPER">Udvikler</option>
-                    <option value="ADMIN">Admin</option>
-                </select> <br> <br>
-                <button type="submit" class="submit-btn">Tilmeld</button> <br> <br>
-            </form>
-            <br>
-            <td>
-                <a href="/">
-                    <button type="button" class="btn-2">Tilbage til login</button>
-                </a>
-            </td>
-        </div>
+<header>
+    <h1>Alpha Solution</h1>
+</header>
+
+<main style="text-align: center;">
+    <div>
+        <h2>REGISTRER DIG HER</h2>
+        <form action="/newRegistration" method="post">
+            <input type="text" name="firstName" placeholder="Fornavn" required> <br><br>
+            <input type="text" name="lastName" placeholder="Efternavn" required> <br><br>
+            <input type="email" name="username" placeholder="Email" required> <br><br>
+            <input type="password" name="userPassword" placeholder="Adgangskode" required> <br><br>
+            <select name="role" required>
+                <option value="" disabled selected>Vælg din rolle</option>
+                <option value="PROJECT_LEADER">Projektleder</option>
+                <option value="DEVELOPER">Udvikler</option>
+                <option value="ADMIN">Admin</option>
+            </select> <br><br>
+            <button type="submit">Tilmeld</button>
+        </form>
+        <br>
+        <p>Har du allerede en konto? <a href="/login">Log ind her</a></p>
     </div>
-</div>
+    <footer class="logo-middle">
+        <div class="footer-content">
+            <div class="contact-info">
+                <p>Kontakt os:</p>
+                <p>Email: AlphasolutionStudent@Examproject.com</p>
+                <p>Telefon: +45 1234 5678</p>
+            </div>
+            <div class="logo-bottom-right">
+                <img src="https://dynamicweb.com/Admin/Public/GetImage.ashx?image=%2FFiles%2FImages%2FPartners%2FAlpha+Solutions%2FAlphasolutions_web.png&width=640&format=webp" alt="Logo">
+            </div>
+        </div>
+    </footer>
+</main>
 </body>
 </html>
