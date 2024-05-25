@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <link th:href="@{/welcomePage.css}" rel="stylesheet">
+  <link th:href="@{/style.css}" rel="stylesheet">
   <title>Rediger Task</title>
 </head>
 <body>
-<h2>Rediger Task</h2>
+<h2>Rediger Dine Opgaver</h2>
 <form action="/editTask" method="post" th:object="${editTask}">
   <p>
     <label for="editTaskName">Navn:</label>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="@{/welcomePage.css}" rel="stylesheet">
+    <link th:href="@{/style.css}" rel="stylesheet">
     <title>Hjemmeside</title>
 </head>
 
@@ -11,15 +11,15 @@
 <h2>Velkommen til Projektopdeling</h2>
 <p>Du kan oprette et nyt projekt ved at klikke på knappen nedenfor for at hjælpe med at opdele dit projekt:</p>
 
-<a class="button" href="/create">Opret Nyt Projekt</a>
+<a class="button" th:href="@{/create}">Opret Nyt Projekt</a>
 
-<p>Har du allerede en konto? <a href="/login">Log ind her</a></p>
+<p>Har du allerede en konto? <a th:href="@{/login}">Log ind her</a></p>
 
 <footer class="logo-middle">
     <div class="footer-content">
         <div class="contact-info">
             <p>Kontakt os:</p>
-            <p>Email: info@example.com</p>
+            <p>E-mail: AlphasolutionStudent@Examproject.com</p>
             <p>Telefon: +45 1234 5678</p>
         </div>
         <div class="logo-bottom-right">
