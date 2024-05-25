@@ -163,7 +163,7 @@ public class ProjectController implements ErrorController {
         model.addAttribute("tasks", tasks);
         return "subProjectDetails";
     }
-    @GetMapping("/showTasks/{subProjectId}")
+    @GetMapping("/showTask/{subProjectId}")
     public String showTasksBySubProjectId(@PathVariable("subProjectId") int subProjectId, Model model) {
         List<Task> tasks = taskService.findTasksBySubProjectId(subProjectId);
         model.addAttribute("tasks", tasks);
@@ -181,9 +181,9 @@ public class ProjectController implements ErrorController {
     @PostMapping("/createTask")
     public String createTask(@ModelAttribute("task") Task task) {
         taskService.createTask(task);
-        return "redirect:/showTasks";
+        return "redirect:/showTask";
     }
-    @GetMapping("/showTasks")
+    @GetMapping("/showTask")
     public String showTasks(Model model) {
         List<Task> tasks = taskService.findAllTasks();
         model.addAttribute("tasks", tasks);
@@ -193,19 +193,19 @@ public class ProjectController implements ErrorController {
     @PostMapping("/tasks/{taskId}/delete")
     public String deleteTaskById(@PathVariable("taskId") int taskId) {
         taskService.deleteTask(taskId);
-        return "redirect:/showTasks";
+        return "redirect:/showTask";
     }
 
     @GetMapping("/tasks/{taskId}/editTask")
     public String editTask(@PathVariable("taskId") int taskId, Model model) {
         Task task = taskService.findTaskById(taskId);
-        model.addAttribute("task", task);
+        model.addAttribute("editTask", task);
         return "editTask";
     }
 
     @PostMapping("/editTask")
     public String editTask(@ModelAttribute Task task) {
         taskService.editTask(task.getTaskId(), task);
-        return "redirect:/showTasks";
+        return "redirect:/showTask";
     }
 }

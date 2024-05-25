@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link th:href="@{/welcomePage.css}" rel="stylesheet">
-    <style>
+    <link th:href="@{/style.css}" rel="stylesheet">
+    <style th:inline="text">
         header {
             text-align: center;
         }
@@ -32,25 +32,22 @@
                 <button type="submit" class="submit-btn">LOG IND</button><br><br><br><br><br><br><br>
             </form>
 
-            <p>
-
-            </p>
+            <p th:if="${error}" th:text="${error}"></p>
         </div>
     </div>
 </main>
 
-    <footer class="logo-middle">
-        <div class="footer-content">
-            <div class="contact-info">
-                <p>Kontakt os:</p>
-                <p>Email: info@example.com</p>
-                <p>Telefon: +45 1234 5678</p>
-            </div>
-            <div class="logo-bottom-right">
-                <img src="https://dynamicweb.com/Admin/Public/GetImage.ashx?image=%2FFiles%2FImages%2FPartners%2FAlpha+Solutions%2FAlphasolutions_web.png&width=640&format=webp" alt="Logo">
-            </div>
+<footer class="logo-middle">
+    <div class="footer-content">
+        <div class="contact-info">
+            <p>Kontakt os:</p>
+            <p>E-mail: AlphasolutionStudent@Examproject.com</p>
+            <p>Telefon: +45 1234 5678</p>
         </div>
-
+        <div class="logo-bottom-right">
+            <img src="https://dynamicweb.com/Admin/Public/GetImage.ashx?image=%2FFiles%2FImages%2FPartners%2FAlpha+Solutions%2FAlphasolutions_web.png&width=640&format=webp" alt="Logo">
+        </div>
+    </div>
 </footer>
 </body>
 </html>

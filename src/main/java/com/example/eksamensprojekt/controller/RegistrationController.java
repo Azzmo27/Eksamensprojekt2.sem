@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RegistrationController {
@@ -26,12 +27,23 @@ public class RegistrationController {
 
     @PostMapping("/newRegistration")
     public String registerUser(User user) {
-        userService.createUser(user);
+        userService.saveUser(user);
         return "redirect:/create";
     }
 
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestParam("username") String username, @RequestParam("user_password") String password, Model model) {
+        boolean isAuthenticated = userService.verifyUserLogin(username, password);
+        if (isAuthenticated) {
+            return "redirect:/home";
+        } else {
+            model.addAttribute("error", "Invalid credentials");
+            return "login";
+        }
     }
 }

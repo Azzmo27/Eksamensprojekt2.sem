@@ -5,8 +5,6 @@ import com.example.eksamensprojekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
-
 @Service
 public class UserService {
     @Autowired
@@ -26,5 +24,9 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public boolean authenticate(String username, String password) {
+        return userRepository.verifyUserLogin(username, password);
     }
 }
