@@ -8,7 +8,7 @@ Før du går i gang med at bidrage til vores projekt, vil vi bede dig om at læs
 2. Opret en ny branch 
 3. Udfør ændringer og tilføjelser.
 4. Test dine ændringer 
-5. Når du er færdig med dine ændringer, lav en pull request fra din branch til hovedgrenen (master)
+5. Når du er færdig med dine ændringer, lav en pull request fra din branch til master
 6. Vi vil gennemgå dine ændringer og enten acceptere eller afvise din pull request
 
 
