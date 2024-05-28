@@ -56,23 +56,23 @@ Hvis disse trin er fulgt korret så kan projektet køre og forbindelse til datab
 Hvis man skal oprette et projekt med subprojekt og opgaver, så kan man følge denne guide for nemmere brug. 
 
 
-1. Først bliver man mødt af velkom sidden og der kan man oprette et projekt ved at tryk på `opret projekt`. 
+1. Først bliver man mødt af tilmeldingssiden, hvor man enten kan registrere sig selv eller gå til loginsiden.
+   
+3. Efter tilmeldingsiden/login kan man oprette et projekt ved at tryk på `opret projekt`. 
+
+4. Efter at have trykket på knappen kommer du ind på oprettelsessiden, hvor du kan oprette dit projekt. Her skal du indtaste projektets navn, en beskrivelse, startdato og slutdato, og derefter trykke på `Opret projekt` for at færdiggøre oprettelsen.
 
 
-
-2. Efter at have trykket på knappen kommer du ind på oprettelsessiden, hvor du kan oprette dit projekt. Her skal du indtaste projektets navn, en beskrivelse, startdato og slutdato, og derefter trykke på `Opret projekt` for at færdiggøre oprettelsen.
-
-
-3. Efter oprettelsen ledes du videre til en liste over alle dine oprettede projekter. For at tilføje et subprojekt til det valgte projekt, skal du trykke på `vælg projekter`
+5. Efter oprettelsen ledes du videre til en liste over alle dine oprettede projekter. For at tilføje et subprojekt til det valgte projekt, skal du trykke på `vælg projekter`
 
 
-4. Så bliver du ledt hen til det pågældende projekt, hvor du kan se alle underprojekter og opgaver tilknyttet projektet. Her har du mulighed for at oprette et nyt underprojekt ved at trykke på "Opret nyt underprojekt" `Opret nyt underprojekt` 
+6. Så bliver du ledt hen til det pågældende projekt, hvor du kan se alle underprojekter og opgaver tilknyttet projektet. Her har du mulighed for at oprette et nyt underprojekt ved at trykke på "Opret nyt underprojekt" `Opret nyt underprojekt` 
  
 
-5. I `Opret underprojekt` skal du indtaste navnet på dit subprojekt, en beskrivelse, start- og slutdato, og derefter trykke på "Opret nyt subprojekt". Herefter bliver du ført tilbage til det pågældende projekt, hvor du kan se dit nye subprojekt tilknyttet projektet.
+7. I `Opret underprojekt` skal du indtaste navnet på dit subprojekt, en beskrivelse, start- og slutdato, og derefter trykke på "Opret nyt subprojekt". Herefter bliver du ført tilbage til det pågældende projekt, hvor du kan se dit nye subprojekt tilknyttet projektet.
 
 
-6. For at oprette en opgave til det specifikke subprojekt skal du trykke på `Opret ny opgave`. Her skal du indtaste opgavens navn, en beskrivelse samt start- og slutdato, og derefter trykke på "Opret ny opgave". Efter oprettelsen bliver du ført tilbage til det pågældende projekt med det tilhørende subprojekt og de tilsvarende opgaver.
+8. For at oprette en opgave til det specifikke subprojekt skal du trykke på `Opret ny opgave`. Her skal du indtaste opgavens navn, en beskrivelse samt start- og slutdato, og derefter trykke på "Opret ny opgave". Efter oprettelsen bliver du ført tilbage til det pågældende projekt med det tilhørende subprojekt og de tilsvarende opgaver.
 # kalkulationsværktøj API 
 
 #### Forsiden
