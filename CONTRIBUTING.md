@@ -4,7 +4,7 @@ Tak for din interesse i at bidrage til vores eksamensprojekt for Alpha Solutions
 Før du går i gang med at bidrage til vores projekt, vil vi bede dig om at læse vores `contributing.md` for at sikre, at dit bidrag passer til vores udviklingsproces.
 
 ## Hvordan kan du bidrag til vores projekt?
-1. Fork eller clon projektet 
+1. Clon projektet 
 2. Opret en ny branch 
 3. Udfør ændringer og tilføjelser.
 4. Test dine ændringer 
