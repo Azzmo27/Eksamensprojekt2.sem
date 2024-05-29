@@ -28,7 +28,7 @@ public class RegistrationController {
     @PostMapping("/newRegistration")
     public String registerUser(User user) {
         userService.saveUser(user);
-        return "redirect:/create";
+        return "redirect:/showProject";
     }
 
     @GetMapping("/login")
@@ -40,7 +40,7 @@ public class RegistrationController {
     public String loginUser(@RequestParam("username") String username, @RequestParam("user_password") String password, Model model) {
         boolean isAuthenticated = userService.verifyUserLogin(username, password);
         if (isAuthenticated) {
-            return "redirect:/home";
+            return "redirect:/showProject";
         } else {
             model.addAttribute("error", "Invalid credentials");
             return "login";
