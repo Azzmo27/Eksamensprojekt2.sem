@@ -23,7 +23,7 @@ Intention for projekt er at skabe et kalkulationsværktøj, der giver brugerne m
 
 ## Installation
 
-Her kan projektet afprøves:....
+Her kan projektet afprøves: https://examprojectalphasolution.azurewebsites.net/
 
 Hvis der opleves problemer med at køre projektet ved blot at klikke på linket, eller hvis man ønsker at køre projektet på egen database, så skal der konfigureres databaseforbindelse manuelt. Her er en vejledning for dette:
 
