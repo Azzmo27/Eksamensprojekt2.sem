@@ -58,7 +58,7 @@ Hvis man skal oprette et projekt med subprojekt og opgaver, så kan man følge d
 
 1. Først bliver man mødt af tilmeldingssiden, hvor man enten kan registrere sig selv eller gå til loginsiden.
 ![Billede 29 05 2024 kl  06 14](https://github.com/Azzmo27/Eksamensprojekt2.sem/assets/144421512/0d743daf-efd8-469b-8065-d99eee514d74)
-![Billede 29 05 2024 kl  06 14 (1)](https://github.com/Azzmo27/Eksamensprojekt2.sem/assets/144421512/bab56a3b-0da4-4499-8323-26431ae1259c)
+
 3. Efter tilmeldingsiden/login kan man oprette et projekt ved at tryk på `opret projekt`. 
 ![Billede 29 05 2024 kl  06 14 (1)](https://github.com/Azzmo27/Eksamensprojekt2.sem/assets/144421512/bab56a3b-0da4-4499-8323-26431ae1259c)
 4. Efter at have trykket på knappen kommer du ind på oprettelsessiden, hvor du kan oprette dit projekt. Her skal du indtaste projektets navn, en beskrivelse, startdato og slutdato, og derefter trykke på `Opret projekt` for at færdiggøre oprettelsen.
