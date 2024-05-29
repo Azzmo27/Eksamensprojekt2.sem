@@ -183,6 +183,7 @@ public class ProjectController implements ErrorController {
         taskService.createTask(task);
         return "redirect:/showTask";
     }
+
     @GetMapping("/showTask")
     public String showTasks(Model model) {
         List<Task> tasks = taskService.findAllTasks();
