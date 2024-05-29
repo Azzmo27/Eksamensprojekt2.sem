@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class Task {
     private int taskId;
+
+    private int projectId;
     private String taskName;
     private String taskDescription;
     private LocalDate taskStartDate;
@@ -29,6 +31,13 @@ public class Task {
         this.taskId = taskId;
     }
 
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
     public String getTaskName() {
         return taskName;
     }
