@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class UserRepository {
 
     @Autowired
-    private ConnectionManager connectionManager;
+    public ConnectionManager connectionManager;
 
     public void createUser(User user) {
         String sql = "INSERT INTO AppUser (username, user_password, firstName, lastName, email, role) VALUES (?, ?, ?, ?, ?, ?)";

@@ -27,13 +27,10 @@ public class SubProjectRepositoryIntegrationTest {
 
     @Test
     public void testCreateSubProject() {
-        // Arrange
         Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 2);
 
-        // Act
         subProjectService.createSubProject(subproject, subproject.getProjectId());
 
-        // Assert
         Subproject createdSubproject = subProjectRepository.findSubProjectById(subproject.getSubProjectId());
         assertNotNull(createdSubproject);
         assertEquals(subproject.getSubProjectName(), createdSubproject.getSubProjectName());
@@ -41,15 +38,12 @@ public class SubProjectRepositoryIntegrationTest {
 
     @Test
     public void testEditSubProject() {
-        // Arrange
         Subproject subproject = new Subproject("TestSubProject", "Updated Description", LocalDate.now(), LocalDate.now(), "Active", 2);
         subProjectService.createSubProject(subproject, subproject.getProjectId());
 
-        // Act
         subproject.setSubProjectDescription("Updated Description");
         subProjectService.editSubProject(subproject.getSubProjectId(), subproject);
 
-        // Assert
         Subproject editedSubproject = subProjectRepository.findSubProjectById(subproject.getSubProjectId());
         assertNotNull(editedSubproject);
         assertEquals(subproject.getSubProjectDescription(), editedSubproject.getSubProjectDescription());
@@ -57,14 +51,12 @@ public class SubProjectRepositoryIntegrationTest {
 
     @Test
     public void testDeleteSubProject() {
-        // Arrange
+
         Subproject subproject = new Subproject("TestSubProject", "Test Description", LocalDate.now(), LocalDate.now(), "Active", 2);
         subProjectService.createSubProject(subproject, subproject.getProjectId());
 
-        // Act
         subProjectService.deleteSubProject(subproject.getSubProjectId());
 
-        // Assert
         Subproject deletedSubproject = subProjectRepository.findSubProjectById(subproject.getSubProjectId());
         assertNull(deletedSubproject);
     }

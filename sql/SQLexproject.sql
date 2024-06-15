@@ -36,47 +36,47 @@ DELIMITER ;
 CALL AddColumnIfNotExists('Subproject', 'subProjectStatus', 'VARCHAR(50)');
 CALL AddColumnIfNotExists('Task', 'timeEstimate', 'INT');
 
-CREATE TABLE IF NOT EXISTS Project (
-                                       projectId INT PRIMARY KEY AUTO_INCREMENT,
-                                       projectName VARCHAR(255) NOT NULL,
-                                       projectDescription TEXT,
-                                       projectStartDate DATE,
-                                       projectEndDate DATE,
-                                       projectStatus VARCHAR(50)
-);
+    CREATE TABLE IF NOT EXISTS Project (
+    projectId INT PRIMARY KEY AUTO_INCREMENT,
+    projectName VARCHAR(255) NOT NULL,
+    projectDescription TEXT,
+    projectStartDate DATE,
+    projectEndDate DATE,
+    projectStatus VARCHAR(50)
+    );
 
-CREATE TABLE IF NOT EXISTS Subproject (
-                                          subProjectId INT PRIMARY KEY AUTO_INCREMENT,
-                                          subProjectName VARCHAR(255) NOT NULL,
-                                          subProjectDescription TEXT,
-                                          subProjectStartDate DATE,
-                                          subProjectEndDate DATE,
-                                          subProjectStatus VARCHAR(50),
-                                          projectId INT,
-                                          FOREIGN KEY (projectId) REFERENCES Project(projectId)
-);
+    CREATE TABLE IF NOT EXISTS Subproject (
+    subProjectId INT PRIMARY KEY AUTO_INCREMENT,
+    subProjectName VARCHAR(255) NOT NULL,
+    subProjectDescription TEXT,
+    subProjectStartDate DATE,
+    subProjectEndDate DATE,
+    subProjectStatus VARCHAR(50),
+    projectId INT,
+    FOREIGN KEY (projectId) REFERENCES Project(projectId)
+    );
 
-CREATE TABLE IF NOT EXISTS Task (
-                                    taskId INT PRIMARY KEY AUTO_INCREMENT,
-                                    taskName VARCHAR(255) NOT NULL,
-                                    taskDescription TEXT,
-                                    taskStartDate DATE,
-                                    taskEndDate DATE,
-                                    subProjectId INT,
-                                    timeEstimate INT,
-                                    FOREIGN KEY (subProjectId) REFERENCES Subproject(subProjectId) ON DELETE CASCADE
-);
+    CREATE TABLE IF NOT EXISTS Task (
+    taskId INT PRIMARY KEY AUTO_INCREMENT,
+    taskName VARCHAR(255) NOT NULL,
+    taskDescription TEXT,
+    taskStartDate DATE,
+    taskEndDate DATE,
+    subProjectId INT,
+    timeEstimate INT,
+    FOREIGN KEY (subProjectId) REFERENCES Subproject(subProjectId) ON DELETE CASCADE
+    );
 
-DROP TABLE IF EXISTS AppUser; -- Ensure the table is dropped first to avoid conflicts
-CREATE TABLE IF NOT EXISTS AppUser (
-                                       user_id INT AUTO_INCREMENT PRIMARY KEY,
-                                       username VARCHAR(255) NOT NULL,
-                                       user_password VARCHAR(255) NOT NULL,
-                                       firstName VARCHAR(255),
-                                       lastName VARCHAR(255),
-                                       email VARCHAR(255),
-                                       role VARCHAR(50)
-);
+    DROP TABLE IF EXISTS AppUser;
+    CREATE TABLE IF NOT EXISTS AppUser (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    user_password VARCHAR(255) NOT NULL,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    email VARCHAR(255),
+    role VARCHAR(50)
+    );
 
 INSERT INTO Project (projectName, projectDescription, projectStartDate, projectEndDate, projectStatus)
 VALUES ('Project1', 'Description1', '2024-01-01', '2024-12-31', 'active');
